@@ -94,9 +94,10 @@
       padding: 0 24px;
     }
 
-    section { padding: 80px 0; }
-    section + section { margin-top: -64px; }
+    section { padding: 128px 0; }
+    section + section { margin-top: -128px; }
     .environment, .setup, .closing { margin-top: 0; }
+    .container > :last-child { margin-bottom: 0; }
 
     /* ── Site Header ── */
     .header-wrap {
@@ -241,7 +242,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 24px;
-      margin: 64px 0;
+      margin: 28px 0;
     }
 
     .mode-card {
@@ -305,6 +306,71 @@
       color: var(--text-muted);
       font-size: 0.95rem;
       font-style: italic;
+    }
+
+    .tooltip-wrap {
+      position: relative;
+      display: inline;
+    }
+
+    .tooltip-trigger {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1.5px;
+      cursor: help;
+      color: inherit;
+    }
+
+    .tooltip-trigger:hover {
+      color: var(--accent);
+    }
+
+    .tooltip-body {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 260px;
+      background: var(--dark-bg);
+      color: var(--dark-text);
+      font-size: 0.85rem;
+      line-height: 1.5;
+      padding: 14px 16px;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      z-index: 10;
+      text-align: left;
+      font-style: normal;
+    }
+
+    .tooltip-body::before {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 14px;
+    }
+
+    .tooltip-body::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: var(--dark-bg);
+    }
+
+    .tooltip-wrap:hover .tooltip-body {
+      display: block;
+    }
+
+    .tooltip-body a {
+      color: var(--accent);
+      font-size: 0.82rem;
     }
 
     /* ── Science Section ── */
@@ -373,52 +439,71 @@
 
     details .details-body p:first-child { margin-top: 14px; }
 
-    /* ── Environmental (dark) ── */
+    /* ── Environmental (forest green) ── */
     .environment {
-      background: var(--dark-bg);
-      color: var(--dark-text);
+      background: #1a3a2a;
+      color: #e8f0eb;
     }
 
-    .environment h2 { color: var(--dark-text); }
+    .environment h2 { color: #e8f0eb; }
 
-    .environment .stat-number { color: var(--accent); }
-    .environment .stat-label { color: var(--dark-muted); }
+    .environment .env-intro {
+      color: #a8c5b4;
+      font-size: 1.05rem;
+    }
+
+    .environment .stat-number { color: #6ecf8e; }
+    .environment .stat-label { color: #a8c5b4; }
 
     .environment details {
-      border-color: #333;
+      border-color: #2d5a40;
       background: rgba(255,255,255,0.04);
     }
 
-    .environment details summary { color: var(--dark-text); }
-    .environment details summary::after { color: var(--dark-muted); }
-    .environment details .details-body { border-top-color: #333; color: var(--dark-muted); }
-    .environment details .details-body p { color: var(--dark-muted); }
+    .environment details summary { color: #e8f0eb; }
+    .environment details summary::after { color: #a8c5b4; }
+    .environment details .details-body { border-top-color: #2d5a40; color: #a8c5b4; }
+    .environment details .details-body p { color: #a8c5b4; }
+    .environment details .details-body strong { color: #e8f0eb; }
 
     .env-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      margin: 64px 0;
+      margin: 48px 0;
+    }
+
+    .env-empowerment {
+      text-align: center;
+      color: #a8c5b4;
+      font-size: 0.95rem;
+      font-style: italic;
+      margin-top: 32px;
+    }
+
+    .env-empowerment strong {
+      color: #6ecf8e;
+      font-style: normal;
     }
 
     /* ── Impact Calculator ── */
     .calculator {
       background: rgba(255,255,255,0.06);
-      border: 1px solid #333;
+      border: 1px solid #2d5a40;
       border-radius: 12px;
       padding: 28px;
-      margin-top: 64px;
+      margin-bottom: 32px;
     }
 
     .calculator h3 {
       font-family: 'Fraunces', Georgia, serif;
-      color: var(--dark-text);
+      color: #e8f0eb;
       margin-top: 0;
       margin-bottom: 16px;
     }
 
     .calc-label {
-      color: var(--dark-muted);
+      color: #a8c5b4;
       font-size: 0.95rem;
       margin-bottom: 12px;
     }
@@ -435,7 +520,7 @@
       -webkit-appearance: none;
       height: 6px;
       border-radius: 3px;
-      background: #333;
+      background: #2d5a40;
       outline: none;
     }
 
@@ -444,25 +529,25 @@
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      background: var(--accent);
+      background: #6ecf8e;
       cursor: pointer;
-      border: 2px solid var(--dark-bg);
+      border: 2px solid #1a3a2a;
     }
 
     .calc-slider-row input[type="range"]::-moz-range-thumb {
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      background: var(--accent);
+      background: #6ecf8e;
       cursor: pointer;
-      border: 2px solid var(--dark-bg);
+      border: 2px solid #1a3a2a;
     }
 
     .calc-pct {
       font-family: 'Fraunces', Georgia, serif;
       font-size: 1.5rem;
       font-weight: 700;
-      color: var(--accent);
+      color: #6ecf8e;
       min-width: 60px;
       text-align: right;
     }
@@ -476,7 +561,7 @@
     .calc-result {
       text-align: center;
       padding: 16px 8px;
-      background: rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.05);
       border-radius: 8px;
     }
 
@@ -484,16 +569,67 @@
       font-family: 'Fraunces', Georgia, serif;
       font-size: 1.4rem;
       font-weight: 700;
-      color: var(--accent);
+      color: #6ecf8e;
       display: block;
     }
 
     .calc-result-label {
       font-size: 0.8rem;
-      color: var(--dark-muted);
+      color: #a8c5b4;
       margin-top: 4px;
       display: block;
       line-height: 1.3;
+    }
+
+    .calc-footnote {
+      font-size: 0.78rem;
+      color: #6a9a7e;
+      margin-top: 16px;
+      text-align: center;
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .calc-footnote a {
+      color: #6ecf8e;
+      text-decoration-thickness: 1px;
+    }
+
+    .calc-timeframe {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .calc-timeframe-label {
+      font-size: 0.88rem;
+      color: #a8c5b4;
+    }
+
+    .calc-time-pill {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid #2d5a40;
+      border-radius: 20px;
+      color: #a8c5b4;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+
+    .calc-time-pill:hover {
+      border-color: #6ecf8e;
+      color: #e8f0eb;
+    }
+
+    .calc-time-pill.selected {
+      background: #6ecf8e;
+      border-color: #6ecf8e;
+      color: #1a3a2a;
     }
 
     /* ── Setup Section ── */
@@ -504,7 +640,7 @@
     }
 
     .triage-step {
-      margin-bottom: 32px;
+      margin-bottom: 0;
     }
 
     .triage-step.hidden,
@@ -912,6 +1048,8 @@
       align-items: flex-start;
     }
 
+    .expect-list li:last-child { margin-bottom: 0; }
+
     .expect-icon {
       font-size: 1.4rem;
       flex-shrink: 0;
@@ -928,6 +1066,113 @@
     .expect-text {
       font-size: 0.95rem;
       color: var(--text-muted);
+    }
+
+    /* ── App Teaser ── */
+    .app-teaser {
+      background: linear-gradient(135deg, #fef9f0, #fdf3e2);
+      border: 1px solid #e8d5b8;
+      border-radius: 12px;
+      padding: 28px;
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    .app-teaser-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .app-teaser-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .app-teaser-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .app-teaser-plus {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 10px 20px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .app-teaser-plus:hover {
+      border-color: var(--accent);
+    }
+
+    .app-teaser-plus.voted {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .app-teaser-plus-count {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .app-teaser-form {
+      display: flex;
+      gap: 8px;
+    }
+
+    .app-teaser-form input[type="email"] {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.92rem;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+      width: 220px;
+      transition: border-color 0.15s;
+    }
+
+    .app-teaser-form input[type="email"]:focus {
+      border-color: var(--accent);
+    }
+
+    .app-teaser-form button {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 10px 18px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    .app-teaser-form button:hover {
+      background: #a8660f;
+    }
+
+    .app-teaser-thanks {
+      font-size: 0.92rem;
+      color: var(--green);
+      font-weight: 600;
+      display: none;
     }
 
     /* ── FAQ ── */
@@ -960,7 +1205,6 @@
     @media (max-width: 768px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
       .modes-grid { gap: 12px; }
-      .env-stats { grid-template-columns: 1fr; gap: 16px; }
       .triage-options { gap: 8px; }
       .triage-pill { padding: 8px 16px; font-size: 0.88rem; }
       .calc-results { grid-template-columns: 1fr; }
@@ -968,8 +1212,8 @@
 
     @media (max-width: 600px) {
       body { font-size: 16px; }
-      section { padding: 64px 0; }
-      section + section { margin-top: -48px; }
+      section { padding: 96px 0; }
+      section + section { margin-top: -96px; }
       .site-header { flex-wrap: wrap; gap: 8px; padding: 14px 24px !important; }
       .header-badge { position: static; transform: none; width: 100%; text-align: center; order: -1; }
       h2 { font-size: 1.4rem; }
@@ -983,6 +1227,10 @@
       .calc-result-number { font-size: 1.2rem; }
       .triage-cards { grid-template-columns: 1fr; gap: 16px; }
       .triage-card { padding: 20px 18px; }
+      .app-teaser { padding: 22px 18px; }
+      .app-teaser-actions { flex-direction: column; }
+      .app-teaser-form { width: 100%; }
+      .app-teaser-form input[type="email"] { flex: 1; width: auto; min-width: 0; }
     }
   </style>
 </head>
@@ -1008,15 +1256,15 @@
     <!-- ═══════════════════════════════════════════════════ -->
     <section>
       <div class="container">
-        <h2>How It Works</h2>
-        <p>Your Macbook gets two modes. Switch between them with a single tap.</p>
+        <h2>How BetterBattery Works</h2>
+        <p>Your MacBook gets two power modes. Switch between them with a single tap.</p>
 
         <div class="modes-grid">
           <div class="mode-card">
             <div class="mode-icon">&#x26A1;</div>
             <div class="mode-title">Desk Mode</div>
             <p class="mode-detail">Battery holds at 70%</p>
-            <p class="mode-detail">Mac runs on wall power</p>
+            <p class="mode-detail">Essentially a <span class="tooltip-wrap"><span class="tooltip-trigger">PSU</span><span class="tooltip-body"><strong>Power Supply Unit</strong> &mdash; your Mac runs directly on wall power while the battery rests at a safe charge level, just like a desktop computer.<br><a href="https://en.wikipedia.org/wiki/Power_supply_unit_(computer)" target="_blank" rel="noopener">Learn more &rarr;</a></span></span> for your MacBook</p>
           </div>
           <div class="mode-card">
             <div class="mode-icon">&#x1F50B;</div>
@@ -1026,7 +1274,18 @@
           </div>
         </div>
 
-        <p class="reassurance">Your Mac works exactly the same in both modes. On Desk Mode, it may even run cooler and perform better since it's not constantly pushing to 100%.</p>
+        <p class="reassurance">Your Mac works exactly the same in both modes. The BetterBattery method just changes how power is managed &mdash; your Mac may even run cooler on Desk Mode. <a href="#environment" style="color: #2d6a4f; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px;">Your ecosystem will thank you too &#x1F331;</a></p>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- SECTION: LET'S BE REAL                             -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section>
+      <div class="container">
+        <h2>Let's Be Real</h2>
+        <p>Most people's MacBooks live on a desk, plugged in, slowly wearing out the battery that makes it portable. The laptop replaced the desktop &mdash; but Apple didn't update the battery to act like a PSU. <strong>So BetterBattery does.</strong><span id="lbr-more-link"> <a href="#" id="lbr-toggle" style="color: var(--accent); white-space: nowrap;">... more</a></span><span id="lbr-expanded" style="display: none;"><br><br>Apple built <a href="https://support.apple.com/en-us/102589" target="_blank" rel="noopener">Optimized Battery Charging</a> and can even <a href="https://support.apple.com/en-us/102338" target="_blank" rel="noopener">detect when your MacBook is &ldquo;rarely used on battery&rdquo;</a> &mdash; but it doesn't go far enough. It only holds at 80%, you can't customize the limit, and there's no way to toggle between desk and mobile modes. Meanwhile, Microsoft, Lenovo, Dell, and HP all independently shipped their own charge limiters &mdash; because <a href="https://growthmarketreports.com/report/laptop-docking-station-market" target="_blank" rel="noopener">over two-thirds of workplaces deploy docking stations</a> as standard hardware. Everyone knows laptops live on desks. BetterBattery just does something about it. <a href="#setup" style="color: var(--accent); font-weight: 600;">Set it up in 10 minutes &rarr;</a></span></p>
       </div>
     </section>
 
@@ -1041,7 +1300,7 @@
         <ul class="science-list">
           <li><strong>High voltage degrades batteries.</strong> Keeping a lithium-ion cell above 80% charge puts constant stress on the cathode, accelerating chemical breakdown. Lower charge = lower voltage = less stress.</li>
           <li><strong>Every laptop maker knows this.</strong> Apple, Lenovo, Dell, and ASUS all ship some form of charge limiting. The science is settled &mdash; it's just not turned on by default.</li>
-          <li><strong>The numbers are significant.</strong> Batteries held at 70&ndash;80% retain roughly 96% of their capacity after two years. At 100%, that drops to around 80%. That's the difference between a 6-year battery and a 3-year one.</li>
+          <li><strong>The numbers are significant.</strong> Batteries held at 70&ndash;80% retain roughly 96% of their capacity after one year. At 100%, that drops to around 80%. That's the difference between a 6-year battery and a 3-year one.</li>
         </ul>
 
         <details>
@@ -1061,37 +1320,12 @@
     <!-- ═══════════════════════════════════════════════════ -->
     <!-- SECTION 4: ENVIRONMENTAL CASE                      -->
     <!-- ═══════════════════════════════════════════════════ -->
-    <section class="environment">
+    <section class="environment" id="environment">
       <div class="container">
-        <h2>The Environmental Case</h2>
-        <p style="color: var(--dark-muted);">Battery degradation isn't just an inconvenience. It's part of a global extraction and waste cycle.</p>
+        <h2>The Bigger Picture</h2>
+        <p class="env-intro">Every battery that lasts twice as long is one that never needs to be mined, manufactured, shipped, and disposed of. Here's what that adds up to.</p>
 
-        <div class="env-stats">
-          <div class="stat">
-            <span class="stat-number">6&ndash;8g</span>
-            <span class="stat-label">Lithium per MacBook battery &mdash; mined from fragile desert ecosystems</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">70%</span>
-            <span class="stat-label">Of global cobalt comes from the DRC, often from artisanal mines with severe human costs</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">~80kg</span>
-            <span class="stat-label">CO&#8322; emitted manufacturing each replacement battery and shipping it to you</span>
-          </div>
-        </div>
-
-        <details>
-          <summary>E-waste by the numbers</summary>
-          <div class="details-body">
-            <p><strong>62 million tonnes</strong> of electronic waste were generated globally in 2022, making it the fastest-growing waste stream on the planet.</p>
-            <p><strong>Only 22%</strong> of e-waste is documented as properly collected and recycled. The rest goes to landfills, informal recycling, or is unaccounted for.</p>
-            <p><strong>Battery chemicals leach.</strong> Lithium, cobalt, nickel, and manganese from improperly disposed batteries contaminate soil and groundwater. A single laptop battery can affect thousands of liters of water.</p>
-            <p>Every battery that doesn't need to be replaced is one that doesn't need to be mined, manufactured, shipped, and eventually disposed of.</p>
-          </div>
-        </details>
-
-        <!-- Impact Calculator -->
+        <!-- Impact Calculator — lead with agency -->
         <div class="calculator">
           <h3>What if more people did this?</h3>
           <p class="calc-label">Move the slider to see the impact if a percentage of MacBook users adopted charge limiting:</p>
@@ -1101,21 +1335,43 @@
             <span class="calc-pct" id="adoption-value">10%</span>
           </div>
 
+          <div class="calc-timeframe">
+            <span class="calc-timeframe-label">Over</span>
+            <button class="calc-time-pill selected" data-years="1">1 year</button>
+            <button class="calc-time-pill" data-years="5">5 years</button>
+            <button class="calc-time-pill" data-years="10">10 years</button>
+          </div>
+
           <div class="calc-results">
             <div class="calc-result">
-              <span class="calc-result-number" id="calc-replacements">550K</span>
-              <span class="calc-result-label">battery replacements avoided per year</span>
+              <span class="calc-result-number" id="calc-replacements">1.1M</span>
+              <span class="calc-result-label">battery replacements avoided <span id="calc-period">per year</span></span>
             </div>
             <div class="calc-result">
-              <span class="calc-result-number" id="calc-co2">38,500</span>
-              <span class="calc-result-label">tonnes CO&#8322; saved per year</span>
+              <span class="calc-result-number" id="calc-co2">57,143</span>
+              <span class="calc-result-label">tonnes CO&#8322; saved</span>
             </div>
             <div class="calc-result">
-              <span class="calc-result-number" id="calc-lithium">3,850</span>
+              <span class="calc-result-number" id="calc-lithium">8,000</span>
               <span class="calc-result-label">kg lithium kept in the ground</span>
             </div>
           </div>
+          <p class="calc-footnote">Estimates based on published research from Battery University, Apple Environmental Reports, and MIT. <a href="#calc-methodology" id="calc-methodology-link">See the numbers behind this</a></p>
         </div>
+
+        <p class="env-empowerment"><strong>You're not just saving your battery.</strong> You're part of something bigger.</p>
+
+        <details id="calc-methodology">
+          <summary>The numbers behind this</summary>
+          <div class="details-body">
+            <p><strong>6&ndash;8g of lithium</strong> in every MacBook battery &mdash; mined from fragile desert ecosystems in Chile, Argentina, and Australia. <a href="https://batteryguy.com/kb/knowledge-base/how-to-calculate-the-lithium-content-in-a-battery/" target="_blank" rel="noopener">IATA lithium content standard</a></p>
+            <p><strong>70% of global cobalt</strong> comes from the DRC, often from artisanal mines with severe human and environmental costs. <a href="https://pubs.usgs.gov/periodicals/mcs2024/mcs2024-cobalt.pdf" target="_blank" rel="noopener">USGS Mineral Commodity Summary</a></p>
+            <p><strong>~50kg of CO&#8322;</strong> emitted manufacturing and shipping each replacement battery (range: 30&ndash;60kg). <a href="https://climate.mit.edu/ask-mit/how-much-co2-emitted-manufacturing-batteries" target="_blank" rel="noopener">MIT Climate Portal</a>, <a href="https://www.apple.com/environment/" target="_blank" rel="noopener">Apple Environmental Reports</a></p>
+            <p><strong>62 million tonnes</strong> of e-waste generated globally in 2022 &mdash; the fastest-growing waste stream on the planet. Only 22% is properly recycled. <a href="https://ewastemonitor.info/" target="_blank" rel="noopener">Global E-waste Monitor 2024</a></p>
+            <p><strong>Battery chemicals leach.</strong> Lithium, cobalt, nickel, and manganese from improperly disposed batteries contaminate soil and groundwater. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10683946/" target="_blank" rel="noopener">PMC &mdash; Supply chain environmental impacts</a></p>
+            <p style="margin-top: 14px; font-size: 0.88rem;"><strong>Calculator methodology:</strong> Based on ~80M active MacBooks (<a href="https://www.spyhunter.com/shm/macos-stats/" target="_blank" rel="noopener">analyst estimates</a>; ~86% of ~100M Macs). Assumes each adopter avoids one battery replacement per 7 years (<a href="https://support.apple.com/en-us/102888" target="_blank" rel="noopener">Apple rates batteries at 1,000 cycles</a>). CO&#8322; at 50kg and lithium at 7g per replacement. Battery longevity data from <a href="https://batteryuniversity.com/article/bu-808-how-to-prolong-lithium-based-batteries" target="_blank" rel="noopener">Battery University BU-808</a>.</p>
+          </div>
+        </details>
 
       </div>
     </section>
@@ -1470,6 +1726,24 @@ If anything goes wrong at any step, help me troubleshoot before moving on.</code
                 </div>
               </div>
 
+            </div>
+
+            <!-- App Teaser -->
+            <div class="app-teaser">
+              <div class="app-teaser-title">BetterBattery app &mdash; coming soon</div>
+              <p class="app-teaser-desc">Skip the terminal. One-click battery management, built right into a Mac app.</p>
+              <div class="app-teaser-actions">
+                <button class="app-teaser-plus" id="app-plus-btn">
+                  <span>&#x1F44D;</span>
+                  <span>I'd use this</span>
+                  <span class="app-teaser-plus-count" id="app-plus-count"></span>
+                </button>
+                <form class="app-teaser-form" id="app-teaser-form">
+                  <input type="email" placeholder="you@email.com" required aria-label="Email for app updates">
+                  <button type="submit">Notify me</button>
+                </form>
+                <span class="app-teaser-thanks" id="app-teaser-thanks">Thanks! We'll let you know.</span>
+              </div>
             </div>
 
             <!-- Result: DIY accordion (outside the cards, below them) -->
@@ -2053,7 +2327,7 @@ rm -rf ~/Library/Services/Toggle\ Battery\ Limit.workflow</code></pre>
     <section class="closing">
       <div class="container">
         <h2>Your MacBook battery is dying<br>while it sits on your desk.</h2>
-        <p class="subtitle">Over 100 million MacBooks sit plugged in right now, batteries held at 100% &mdash; slowly degrading. Every worn-out battery means more lithium mining, more manufacturing emissions, and more e-waste. A simple change can double your battery's lifespan.</p>
+        <p class="subtitle">Over 100 million Macs sit plugged in right now, batteries held at 100% &mdash; slowly degrading. Every worn-out battery means more lithium mining, more manufacturing emissions, and more e-waste. A simple change can double your battery's lifespan.</p>
 
         <div class="stats-grid">
           <div class="stat">
@@ -2065,7 +2339,7 @@ rm -rf ~/Library/Services/Toggle\ Battery\ Limit.workflow</code></pre>
             <span class="stat-label">Apple battery replacement cost</span>
           </div>
           <div class="stat">
-            <span class="stat-number">100M+</span>
+            <span class="stat-number">80M+</span>
             <span class="stat-label">MacBooks that could benefit</span>
           </div>
           <div class="stat">
@@ -2288,6 +2562,8 @@ rm -rf ~/Library/Services/Toggle\ Battery\ Limit.workflow</code></pre>
     var calcReplacements = document.getElementById('calc-replacements');
     var calcCo2 = document.getElementById('calc-co2');
     var calcLithium = document.getElementById('calc-lithium');
+    var calcPeriod = document.getElementById('calc-period');
+    var selectedYears = 1;
 
     function formatNumber(n) {
       if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
@@ -2297,12 +2573,12 @@ rm -rf ~/Library/Services/Toggle\ Battery\ Limit.workflow</code></pre>
     function updateCalculator() {
       var pct = parseInt(slider.value);
       var rate = pct / 100;
-      var macbooks = 33000000;
+      var macbooks = 80000000;
 
-      // Each adopter avoids ~1 battery replacement per 6 years
-      var replacements = Math.round(rate * macbooks / 6);
-      // ~80kg CO2 per replacement, convert to tonnes
-      var co2 = Math.round(replacements * 80 / 1000);
+      // Each adopter avoids ~1 battery replacement per 7 years
+      var replacements = Math.round(rate * macbooks / 7 * selectedYears);
+      // ~50kg CO2 per replacement, convert to tonnes
+      var co2 = Math.round(replacements * 50 / 1000);
       // ~7g lithium per battery, convert to kg
       var lithium = Math.round(replacements * 7 / 1000);
 
@@ -2310,10 +2586,37 @@ rm -rf ~/Library/Services/Toggle\ Battery\ Limit.workflow</code></pre>
       calcReplacements.textContent = formatNumber(replacements);
       calcCo2.textContent = formatNumber(co2);
       calcLithium.textContent = formatNumber(lithium);
+      calcPeriod.textContent = selectedYears === 1 ? 'per year' : 'over ' + selectedYears + ' years';
     }
 
     slider.addEventListener('input', updateCalculator);
+
+    document.querySelectorAll('.calc-time-pill').forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        document.querySelectorAll('.calc-time-pill').forEach(function(p) { p.classList.remove('selected'); });
+        pill.classList.add('selected');
+        selectedYears = parseInt(pill.getAttribute('data-years'));
+        updateCalculator();
+      });
+    });
+
     updateCalculator();
+
+    // ── "Let's Be Real" progressive disclosure ──
+    document.getElementById('lbr-toggle').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('lbr-more-link').style.display = 'none';
+      document.getElementById('lbr-expanded').style.display = 'inline';
+    });
+
+    // ── Methodology link opens accordion ──
+    document.getElementById('calc-methodology-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      var details = document.getElementById('calc-methodology');
+      details.open = true;
+      var section = details.closest('section');
+      section.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    });
 
     // ── Header: normal at top, sticky reveal-on-scroll-up after passing it ──
     var headerWrap = document.getElementById('header-wrap');
@@ -2345,6 +2648,46 @@ rm -rf ~/Library/Services/Toggle\ Battery\ Limit.workflow</code></pre>
 
       lastScrollY = currentY;
     }, { passive: true });
+
+    // ── App teaser: +1 and email signup ──
+    var plusBtn = document.getElementById('app-plus-btn');
+    var plusCount = document.getElementById('app-plus-count');
+    var appForm = document.getElementById('app-teaser-form');
+    var appThanks = document.getElementById('app-teaser-thanks');
+
+    // +1 button — localStorage for visual feedback
+    var voted = localStorage.getItem('bb-app-voted');
+    var count = parseInt(localStorage.getItem('bb-app-count') || '0', 10);
+    if (voted) {
+      plusBtn.classList.add('voted');
+      plusCount.textContent = '+' + count;
+    }
+
+    plusBtn.addEventListener('click', function() {
+      if (voted) return;
+      voted = true;
+      count++;
+      localStorage.setItem('bb-app-voted', '1');
+      localStorage.setItem('bb-app-count', String(count));
+      plusBtn.classList.add('voted');
+      plusCount.textContent = '+' + count;
+    });
+
+    // Email form — stores locally for now (swap action to Formspree/Buttondown later)
+    var emailSubmitted = localStorage.getItem('bb-app-email');
+    if (emailSubmitted) {
+      appForm.style.display = 'none';
+      appThanks.style.display = 'inline';
+    }
+
+    appForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = appForm.querySelector('input[type="email"]').value;
+      // TODO: Send to Formspree, Buttondown, or similar — for now, store locally
+      localStorage.setItem('bb-app-email', email);
+      appForm.style.display = 'none';
+      appThanks.style.display = 'inline';
+    });
   </script>
 
 </body>
