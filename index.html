@@ -98,19 +98,14 @@
 
     /* ── Site Header ── */
     .site-header {
-      padding: 16px 24px;
+      padding: 14px 24px;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
       max-width: 900px;
       margin: 0 auto;
-    }
-
-    .header-left {
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
+      position: relative;
     }
 
     .site-title {
@@ -118,27 +113,34 @@
       margin-bottom: 0;
     }
 
-    .site-header .platform-note {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .header-meta {
-      text-align: right;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.4;
+    .header-badge {
+      font-size: 0.82rem;
+      color: #2d6a4f;
+      background: #d8f3dc;
+      padding: 4px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.01em;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .header-cta {
-      font-size: 0.9rem;
-      padding: 8px 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 7px 16px;
+      background: var(--text);
+      color: var(--bg);
+      border-radius: 6px;
+      text-decoration: none;
+      transition: opacity 0.15s;
+      letter-spacing: -0.01em;
+    }
+
+    .header-cta:hover {
+      opacity: 0.85;
+      text-decoration: none;
     }
 
     /* ── Closing Impact ── */
@@ -729,8 +731,8 @@
     @media (max-width: 600px) {
       body { font-size: 16px; }
       section { padding: 48px 0; }
-      .site-header { flex-wrap: wrap; gap: 12px; justify-content: center; }
-      .header-left { justify-content: center; }
+      .site-header { flex-wrap: wrap; gap: 10px; justify-content: center; }
+      .header-badge { position: static; transform: none; width: 100%; text-align: center; order: -1; }
       h2 { font-size: 1.4rem; }
       .stat-number { font-size: 1.6rem; }
       .code-block pre { font-size: 13px; padding: 14px 44px 14px 16px; }
@@ -748,14 +750,9 @@
     <!-- HEADER                                             -->
     <!-- ═══════════════════════════════════════════════════ -->
     <header class="site-header">
-      <div class="header-left">
-        <h1 class="site-title">BetterBattery</h1>
-        <span class="platform-note">Apple Silicon Macs only</span>
-      </div>
-      <div class="header-right">
-        <div class="header-meta">Free<br>~10 min</div>
-        <a href="#setup" class="cta-btn header-cta">Set it up &rarr;</a>
-      </div>
+      <h1 class="site-title">BetterBattery</h1>
+      <span class="header-badge">Free &middot; 10 minutes &middot; Apple Silicon Macs</span>
+      <a href="#setup" class="header-cta">Set it up</a>
     </header>
 
 
