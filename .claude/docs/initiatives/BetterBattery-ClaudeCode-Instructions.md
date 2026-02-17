@@ -363,7 +363,7 @@ defaults write company.thebrowser.Browser NSUserKeyEquivalents -dict-add "Always
 ]
 ```
 
-Note: The shortcut may require logging out and back in for macOS to activate it. Tell the user what was changed and which apps were remapped.
+Note: The shortcut **requires logging out and back in** for macOS to activate it. The `pbs -update` command refreshes the services cache, but macOS doesn't pick up new keyboard bindings until the next login session. Tell the user what was changed, which apps were remapped, and that they need to log out and back in.
 
 ### Step 9: Add to Control Center (optional but recommended)
 

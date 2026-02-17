@@ -1527,13 +1527,13 @@ STEP 8 &mdash; SET UP KEYBOARD SHORTCUT (&#x21E7;&#x2318;B)
 - Register &#x21E7;&#x2318;B as the keyboard shortcut via `defaults write pbs NSServicesStatus`
 - Check which of Chrome, Arc, and VS Code are installed &mdash; if any use &#x21E7;&#x2318;B, remap their shortcut to &#x2303;&#x21E7;&#x2318;B (Control+Shift+Command+B) and tell me what you changed
 - Refresh the services cache with /System/Library/CoreServices/pbs -update
-- Tell me if I need to log out and back in for the shortcut to activate
+- Note: I'll need to log out and back in after this step for the shortcut to activate
 
 STEP 9 &mdash; VERIFY &amp; EXPLAIN
 - Run batt status (check limit is set)
 - Run launchctl list | grep betterbattery (confirm monitor is running)
-- Test the keyboard shortcut &#x21E7;&#x2318;B and confirm it toggles
 - Tell me what to expect day-to-day: MagSafe LED colors, battery percentage cycling, what happens during shutdowns
+- Remind me to log out and back in, then test &#x21E7;&#x2318;B after logging back in
 
 Run each step, verify it worked, and move on. If anything fails, troubleshoot before continuing.</code></pre>
                         <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
@@ -1601,13 +1601,13 @@ STEP 8 &mdash; SET UP KEYBOARD SHORTCUT (&#x21E7;&#x2318;B)
 - Register &#x21E7;&#x2318;B as the keyboard shortcut via `defaults write pbs NSServicesStatus`
 - Check which of Chrome, Arc, and VS Code are installed &mdash; if any use &#x21E7;&#x2318;B, remap their shortcut to &#x2303;&#x21E7;&#x2318;B (Control+Shift+Command+B) and tell me what you changed
 - Refresh the services cache with /System/Library/CoreServices/pbs -update
-- Tell me if I need to log out and back in for the shortcut to activate
+- Note: I'll need to log out and back in after this step for the shortcut to activate
 
 STEP 9 &mdash; VERIFY &amp; EXPLAIN
 - Run batt status (check limit is set)
 - Run launchctl list | grep betterbattery (confirm monitor is running)
-- Test the keyboard shortcut &#x21E7;&#x2318;B and confirm it toggles
 - Tell me what to expect day-to-day: MagSafe LED colors, battery percentage cycling, what happens during shutdowns
+- Remind me to log out and back in, then test &#x21E7;&#x2318;B after logging back in
 
 Run each step, verify it worked, and move on. If anything fails, troubleshoot before continuing.</code></pre>
                           <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
@@ -1655,12 +1655,13 @@ STEP 7 &mdash; CREATE MACOS SHORTCUT
 STEP 8 &mdash; SET UP KEYBOARD SHORTCUT (&#x21E7;&#x2318;B)
 - Walk me through creating an Automator Quick Action that runs the toggle script, then assigning Shift+Command+B as the keyboard shortcut in System Settings &rarr; Keyboard &rarr; Keyboard Shortcuts &rarr; Services
 - Also tell me if any apps I use (Chrome, Arc, VS Code) already use that shortcut and what to do about it
+- Note: I'll need to log out and back in after this step for the shortcut to activate
 
 STEP 9 &mdash; VERIFY &amp; EXPLAIN
 - Run batt status (check limit is set)
 - Run launchctl list | grep betterbattery (confirm monitor is running)
-- Test the keyboard shortcut &#x21E7;&#x2318;B and confirm it toggles
 - Tell me what to expect day-to-day: MagSafe LED colors, battery percentage cycling, what happens during shutdowns
+- Remind me to log out and back in, then test &#x21E7;&#x2318;B after logging back in
 
 If anything goes wrong at any step, help me troubleshoot before moving on.</code></pre>
                           <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
@@ -1709,12 +1710,13 @@ STEP 7 &mdash; CREATE MACOS SHORTCUT
 STEP 8 &mdash; SET UP KEYBOARD SHORTCUT (&#x21E7;&#x2318;B)
 - Walk me through creating an Automator Quick Action that runs the toggle script, then assigning Shift+Command+B as the keyboard shortcut in System Settings &rarr; Keyboard &rarr; Keyboard Shortcuts &rarr; Services
 - Also tell me if any apps I use (Chrome, Arc, VS Code) already use that shortcut and what to do about it
+- Note: I'll need to log out and back in after this step for the shortcut to activate
 
 STEP 9 &mdash; VERIFY &amp; EXPLAIN
 - Run batt status (check limit is set)
 - Run launchctl list | grep betterbattery (confirm monitor is running)
-- Test the keyboard shortcut &#x21E7;&#x2318;B and confirm it toggles
 - Tell me what to expect day-to-day: MagSafe LED colors, battery percentage cycling, what happens during shutdowns
+- Remind me to log out and back in, then test &#x21E7;&#x2318;B after logging back in
 
 If anything goes wrong at any step, help me troubleshoot before moving on.</code></pre>
                         <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
@@ -2171,7 +2173,7 @@ defaults write company.thebrowser.Browser NSUserKeyEquivalents -dict-add "Always
                       <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
                     </div>
                     <div class="callout">
-                      <p><strong>Note:</strong> You may need to <strong>log out and back in</strong> for macOS to activate the keyboard shortcut.</p>
+                      <p><strong>Note:</strong> You&rsquo;ll need to <strong>log out and back in</strong> for macOS to activate the keyboard shortcut. A full restart also works, but isn&rsquo;t necessary.</p>
                     </div>
                   </div>
                 </details>
@@ -2389,6 +2391,7 @@ rm -rf ~/Library/Services/Toggle\ Battery\ Limit.workflow</code></pre>
       <p>Built on <a href="https://github.com/charlie0129/batt">batt</a> by charlie0129. Open source, GPL-2.0.</p>
       <p>BetterBattery.org is a free community resource. Not affiliated with Apple.</p>
       <p style="margin-top: 8px; font-size: 0.8rem;">Environmental data: Global E-waste Monitor 2024, Battery University, USGS Mineral Commodity Summaries.</p>
+      <p style="margin-top: 16px; font-size: 0.8rem;">Site by <a href="https://roarke.io" target="_blank" rel="noopener">Roarke</a></p>
     </div>
   </footer>
 
