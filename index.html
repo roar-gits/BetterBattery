@@ -3,32 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BetterBattery — Stop Your MacBook Battery From Dying on Your Desk</title>
-  <meta name="description" content="Free guide to limiting your MacBook's charge level, extending battery life, and toggling between desk and mobile mode with one tap.">
+  <title>BetterBattery — Your MacBook Battery Is Dying on Your Desk</title>
+  <meta name="description" content="Free guide to extending your MacBook battery's lifespan. Limit charge to 70-80%, toggle for mobile, and reduce e-waste. Claude-assisted or DIY setup.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #ffffff;
-      --bg-alt: #f8f9fa;
-      --text: #1a1a2e;
-      --text-muted: #5a5a7a;
-      --accent: #2d6a4f;
-      --accent-light: #d8f3dc;
-      --code-bg: #1e1e2e;
+      --text: #1e1e1e;
+      --text-muted: #5a5a6e;
+      --accent: #c17a1a;
+      --accent-light: #fef3e2;
+      --bg: #faf8f5;
+      --dark-bg: #1e1e1e;
+      --dark-text: #f0ede8;
+      --dark-muted: #a8a4a0;
+      --code-bg: #1a1a2e;
       --code-text: #cdd6f4;
       --code-border: #313244;
-      --border: #e0e0e0;
-      --success: #2d6a4f;
-      --warning: #e07c24;
+      --border: #e5e0d8;
+      --green: #3a8a5c;
       --radius: 8px;
       --max-width: 720px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       color: var(--text);
       background: var(--bg);
       line-height: 1.7;
@@ -36,104 +39,18 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Layout ── */
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    section {
-      padding: 48px 0;
-    }
-
-    section + section {
-      border-top: 1px solid var(--border);
-    }
-
-    /* ── Hero ── */
-    .hero {
-      padding: 80px 0 48px;
-      text-align: center;
-      border-bottom: none;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: var(--accent-light);
-      color: var(--accent);
-      font-size: 14px;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 20px;
-      margin-bottom: 24px;
-      letter-spacing: 0.02em;
-    }
-
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 2.8rem);
-      line-height: 1.2;
-      font-weight: 700;
-      margin-bottom: 20px;
-      letter-spacing: -0.02em;
-    }
-
-    .hero .subtitle {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      max-width: 540px;
-      margin: 0 auto 32px;
-      line-height: 1.6;
-    }
-
-    /* ── Cycle diagram ── */
-    .cycle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 32px auto 0;
-      max-width: 600px;
-    }
-
-    .cycle-step {
-      background: var(--bg-alt);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 10px 16px;
-      font-size: 14px;
-      font-weight: 500;
-      white-space: nowrap;
-    }
-
-    .cycle-arrow {
-      color: var(--text-muted);
-      font-size: 18px;
-    }
-
     /* ── Typography ── */
-    h2 {
-      font-size: 1.6rem;
+    h1, h2, h3 {
+      font-family: 'Fraunces', Georgia, serif;
       font-weight: 700;
-      margin-bottom: 16px;
       letter-spacing: -0.01em;
     }
 
-    h3 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-top: 32px;
-      margin-bottom: 12px;
-    }
+    h2 { font-size: 1.6rem; margin-bottom: 20px; }
+    h3 { font-size: 1.15rem; margin-top: 28px; margin-bottom: 10px; }
 
-    p {
-      margin-bottom: 16px;
-    }
-
-    p:last-child {
-      margin-bottom: 0;
-    }
+    p { margin-bottom: 16px; }
+    p:last-child { margin-bottom: 0; }
 
     a {
       color: var(--accent);
@@ -141,123 +58,17 @@
       text-decoration-thickness: 1px;
       text-underline-offset: 2px;
     }
+    a:hover { text-decoration-thickness: 2px; }
 
-    a:hover {
-      text-decoration-thickness: 2px;
+    strong { font-weight: 600; }
+
+    code, pre code {
+      font-family: 'JetBrains Mono', 'SF Mono', 'Menlo', monospace;
     }
 
-    strong {
-      font-weight: 600;
-    }
-
-    /* ── Checklist ── */
-    .checklist {
-      list-style: none;
-      padding: 0;
-    }
-
-    .checklist li {
-      position: relative;
-      padding-left: 32px;
-      margin-bottom: 10px;
-    }
-
-    .checklist li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 1.1em;
-    }
-
-    /* ── Steps ── */
-    .step {
-      margin-bottom: 48px;
-    }
-
-    .step:last-child {
-      margin-bottom: 0;
-    }
-
-    .step-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      background: var(--accent);
-      color: white;
-      font-size: 14px;
-      font-weight: 700;
-      border-radius: 50%;
-      margin-right: 10px;
-      vertical-align: middle;
-    }
-
-    .step h3 {
-      display: inline;
-      vertical-align: middle;
-      margin-top: 0;
-    }
-
-    .step-content {
-      margin-top: 12px;
-    }
-
-    /* ── Code blocks ── */
-    .code-block {
-      position: relative;
-      margin: 16px 0;
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--code-border);
-    }
-
-    .code-block pre {
-      background: var(--code-bg);
-      color: var(--code-text);
-      padding: 16px 20px;
-      padding-right: 60px;
-      overflow-x: auto;
-      font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
-      font-size: 14px;
-      line-height: 1.6;
-      white-space: pre-wrap;
-      word-break: break-all;
-    }
-
-    .copy-btn {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: #a6adc8;
-      padding: 6px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 12px;
-      font-family: inherit;
-      transition: all 0.15s;
-    }
-
-    .copy-btn:hover {
-      background: rgba(255,255,255,0.18);
-      color: #cdd6f4;
-    }
-
-    .copy-btn.copied {
-      background: rgba(45,106,79,0.3);
-      color: #a6e3a1;
-      border-color: rgba(45,106,79,0.4);
-    }
-
-    /* Inline code */
     code {
-      font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
-      font-size: 0.9em;
-      background: var(--bg-alt);
+      font-size: 0.88em;
+      background: rgba(0,0,0,0.05);
       border: 1px solid var(--border);
       padding: 2px 6px;
       border-radius: 4px;
@@ -270,396 +81,1344 @@
       font-size: inherit;
     }
 
-    /* ── Callout boxes ── */
+    /* ── Layout ── */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .container-wide {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 64px 0; }
+
+    /* ── Site Header ── */
+    .site-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .site-title {
+      font-size: 1.3rem;
+      margin-bottom: 0;
+    }
+
+    .site-header .platform-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-meta {
+      text-align: right;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .header-cta {
+      font-size: 0.9rem;
+      padding: 8px 20px;
+    }
+
+    /* ── Closing Impact ── */
+    .closing {
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .closing h2 {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      line-height: 1.2;
+    }
+
+    .closing .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 40px;
+      line-height: 1.65;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: 800px;
+      margin: 0 auto 48px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-top: 6px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .cta-btn:hover {
+      background: #a8660f;
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    /* ── How It Works ── */
+    .modes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin: 32px 0 24px;
+    }
+
+    .mode-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .mode-icon {
+      font-size: 2.4rem;
+      margin-bottom: 8px;
+    }
+
+    .mode-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .mode-detail {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .mode-led {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      margin-top: 10px;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .led-green {
+      background: #e8f5ec;
+      color: var(--green);
+    }
+
+    .led-amber {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .led-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .led-green .led-dot { background: var(--green); }
+    .led-amber .led-dot { background: var(--accent); }
+
+    .reassurance {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      font-style: italic;
+    }
+
+    /* ── Science Section ── */
+    .science-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .science-list li {
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .science-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    /* ── Details/Accordion ── */
+    details {
+      margin: 20px 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    details summary {
+      padding: 14px 18px;
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+    }
+
+    details summary::-webkit-details-marker { display: none; }
+
+    details summary::after {
+      content: "+";
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+      margin-left: 12px;
+    }
+
+    details[open] summary::after {
+      content: "\2212";
+    }
+
+    details .details-body {
+      padding: 0 18px 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    details .details-body p:first-child { margin-top: 14px; }
+
+    /* ── Environmental (dark) ── */
+    .environment {
+      background: var(--dark-bg);
+      color: var(--dark-text);
+    }
+
+    .environment h2 { color: var(--dark-text); }
+
+    .environment .stat-number { color: var(--accent); }
+    .environment .stat-label { color: var(--dark-muted); }
+
+    .environment details {
+      border-color: #333;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .environment details summary { color: var(--dark-text); }
+    .environment details summary::after { color: var(--dark-muted); }
+    .environment details .details-body { border-top-color: #333; color: var(--dark-muted); }
+    .environment details .details-body p { color: var(--dark-muted); }
+
+    .env-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin: 32px 0;
+    }
+
+    /* ── Impact Calculator ── */
+    .calculator {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 28px;
+      margin-top: 32px;
+    }
+
+    .calculator h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      color: var(--dark-text);
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+
+    .calc-label {
+      color: var(--dark-muted);
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .calc-slider-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .calc-slider-row input[type="range"] {
+      flex: 1;
+      -webkit-appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      background: #333;
+      outline: none;
+    }
+
+    .calc-slider-row input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      border: 2px solid var(--dark-bg);
+    }
+
+    .calc-slider-row input[type="range"]::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      border: 2px solid var(--dark-bg);
+    }
+
+    .calc-pct {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      min-width: 60px;
+      text-align: right;
+    }
+
+    .calc-results {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .calc-result {
+      text-align: center;
+      padding: 16px 8px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 8px;
+    }
+
+    .calc-result-number {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+    }
+
+    .calc-result-label {
+      font-size: 0.8rem;
+      color: var(--dark-muted);
+      margin-top: 4px;
+      display: block;
+      line-height: 1.3;
+    }
+
+    /* ── Setup Section ── */
+    .setup { border-top: 1px solid var(--border); }
+
+    .path-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 28px;
+    }
+
+    .path-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px 24px;
+      border: 1px solid var(--border);
+    }
+
+    .path-card.recommended {
+      border-color: var(--accent);
+      border-width: 2px;
+      position: relative;
+    }
+
+    .path-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+    }
+
+    .path-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .path-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+    }
+
+    /* ── Guided Steps (Path A) ── */
+    .guided-step {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .guided-step:last-child { border-bottom: none; }
+
+    .guided-step.hidden { display: none; }
+
+    .guided-step.completed {
+      opacity: 0.5;
+    }
+
+    .guided-step-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .guided-num {
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .guided-step.completed .guided-num {
+      background: var(--green);
+    }
+    .guided-step.completed .guided-num::after {
+      content: "✓";
+    }
+    .guided-step.completed .guided-num span { display: none; }
+
+    .guided-step h4 {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .step-next-btn {
+      display: inline-block;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 8px 18px;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 14px;
+      transition: background 0.15s;
+    }
+    .step-next-btn:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* ── DIY Steps (Path B) ── */
+    .diy-step {
+      margin-bottom: 8px;
+    }
+
+    .diy-step details {
+      margin: 0;
+    }
+
+    .diy-step details summary {
+      font-size: 0.95rem;
+    }
+
+    /* ── Code Blocks ── */
+    .code-block {
+      position: relative;
+      margin: 14px 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--code-border);
+    }
+
+    .code-block pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 16px 52px 16px 20px;
+      overflow-x: auto;
+      font-size: 13.5px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #a6adc8;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      font-family: 'Source Sans 3', sans-serif;
+      transition: all 0.15s;
+    }
+    .copy-btn:hover { background: rgba(255,255,255,0.16); color: #cdd6f4; }
+    .copy-btn.copied { background: rgba(58,138,92,0.3); color: #a6e3a1; border-color: rgba(58,138,92,0.4); }
+
+    /* ── Callouts ── */
     .callout {
       border-left: 3px solid var(--accent);
       background: var(--accent-light);
       padding: 14px 18px;
       border-radius: 0 var(--radius) var(--radius) 0;
-      margin: 16px 0;
-      font-size: 15px;
+      margin: 14px 0;
+      font-size: 0.92rem;
     }
+    .callout p { margin-bottom: 0; }
 
     .callout.warning {
-      border-left-color: var(--warning);
-      background: #fef3e2;
+      border-left-color: #c73e3e;
+      background: #fef2f2;
     }
 
-    .callout p {
-      margin-bottom: 0;
-    }
-
-    /* ── Navigation path ── */
+    /* ── Nav Path ── */
     .nav-path {
-      background: var(--bg-alt);
+      background: #fff;
       border: 1px solid var(--border);
       padding: 12px 18px;
       border-radius: var(--radius);
-      font-size: 15px;
+      font-size: 0.92rem;
       margin: 12px 0;
     }
+    .nav-path span { color: var(--text-muted); }
 
-    .nav-path span {
+    /* ── What to Expect ── */
+    .expect-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .expect-list li {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+
+    .expect-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      width: 32px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .expect-text strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .expect-text {
+      font-size: 0.95rem;
       color: var(--text-muted);
     }
 
     /* ── FAQ ── */
-    .faq-item {
-      margin-bottom: 28px;
-    }
-
-    .faq-item h3 {
-      margin-top: 0;
-      font-size: 1.05rem;
-    }
-
-    .faq-item p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
+    .faq details { margin-bottom: 8px; }
+    .faq details summary { font-size: 0.95rem; }
+    .faq details .details-body { font-size: 0.93rem; color: var(--text-muted); }
+    .faq details .details-body a { color: var(--accent); }
 
     /* ── Footer ── */
     footer {
-      padding: 40px 0;
+      padding: 48px 0;
       border-top: 1px solid var(--border);
       text-align: center;
       color: var(--text-muted);
-      font-size: 14px;
+      font-size: 0.85rem;
     }
+    footer p { margin-bottom: 8px; }
+    footer a { color: var(--text-muted); }
 
-    footer p {
-      margin-bottom: 8px;
+    /* ── Focus States ── */
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
 
     /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .modes-grid { grid-template-columns: 1fr; }
+      .env-stats { grid-template-columns: 1fr; gap: 16px; }
+      .path-grid { grid-template-columns: 1fr; }
+      .calc-results { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 600px) {
       body { font-size: 16px; }
-      section { padding: 36px 0; }
-      .hero { padding: 56px 0 36px; }
+      section { padding: 48px 0; }
+      .site-header { flex-wrap: wrap; gap: 12px; justify-content: center; }
+      .header-left { justify-content: center; }
       h2 { font-size: 1.4rem; }
-      .cycle { gap: 6px; }
-      .cycle-step { padding: 8px 12px; font-size: 13px; }
-      .code-block pre { font-size: 13px; padding: 14px 16px; padding-right: 50px; }
+      .stat-number { font-size: 1.6rem; }
+      .code-block pre { font-size: 13px; padding: 14px 44px 14px 16px; }
+      .calculator { padding: 20px; }
+      .calc-results { grid-template-columns: 1fr; }
+      .calc-result-number { font-size: 1.2rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-badge">Free &middot; 10 minutes &middot; Apple Silicon Macs</div>
-      <h1>Your MacBook battery is dying while it sits on your desk.</h1>
-      <p class="subtitle">If your MacBook lives on a charger, it's aging faster than it needs to. Fix it in 10 minutes with a free tool, a charge limit, and a one-tap toggle for when you go mobile.</p>
-      <div class="cycle">
-        <div class="cycle-step">At desk: holds at 70%</div>
-        <span class="cycle-arrow">&rarr;</span>
-        <div class="cycle-step">Tap toggle</div>
-        <span class="cycle-arrow">&rarr;</span>
-        <div class="cycle-step">Charges to 100%</div>
-        <span class="cycle-arrow">&rarr;</span>
-        <div class="cycle-step">Go mobile</div>
-        <span class="cycle-arrow">&rarr;</span>
-        <div class="cycle-step">Back at desk: tap toggle</div>
-        <span class="cycle-arrow">&rarr;</span>
-        <div class="cycle-step">Holds at 70% again</div>
+  <main>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- HEADER                                             -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <header class="site-header">
+      <div class="header-left">
+        <h1 class="site-title">BetterBattery</h1>
+        <span class="platform-note">Apple Silicon Macs only</span>
       </div>
-    </div>
-  </section>
-
-  <!-- Why This Matters -->
-  <section>
-    <div class="container">
-      <h2>Why This Matters</h2>
-      <p>Lithium-ion batteries wear out faster when they stay at a high charge level. A MacBook sitting at 100% all day, every day, is degrading its battery for no reason. You're not even using that charge &mdash; the Mac is running off wall power the whole time.</p>
-      <p>By capping the charge at 70&ndash;80%, your Mac runs off the power adapter like a desktop while the battery sits idle in a healthy range. Think of it like a built-in UPS: the battery is there when you need it, but it's not being stressed when you don't.</p>
-      <p>The difference is real. Batteries kept at lower charge levels last significantly longer &mdash; sometimes years longer before you notice capacity loss.</p>
-    </div>
-  </section>
-
-  <!-- What You'll Need -->
-  <section>
-    <div class="container">
-      <h2>What You'll Need</h2>
-      <ul class="checklist">
-        <li>An <strong>Apple Silicon Mac</strong> (M1, M2, M3, or M4 chip &mdash; this won't work on older Intel Macs)</li>
-        <li><strong>macOS Sequoia</strong> (15) or <strong>macOS Tahoe</strong> (26)</li>
-        <li><strong>10 minutes</strong> of your time</li>
-        <li>Willingness to paste a few commands into Terminal (we'll walk you through every one)</li>
-      </ul>
-      <div class="callout" style="margin-top: 20px">
-        <p><strong>Never used Terminal before?</strong> Terminal is an app already on your Mac that lets you type commands directly. You'll find it in Applications &rarr; Utilities &rarr; Terminal. Everything you need to type is written out below &mdash; just copy and paste.</p>
+      <div class="header-right">
+        <div class="header-meta">Free<br>~10 min</div>
+        <a href="#setup" class="cta-btn header-cta">Set it up &rarr;</a>
       </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- Step-by-Step Setup -->
-  <section>
-    <div class="container">
-      <h2>Step-by-Step Setup</h2>
 
-      <!-- Step 1 -->
-      <div class="step">
-        <span class="step-number">1</span>
-        <h3>Install Homebrew</h3>
-        <div class="step-content">
-          <p>Homebrew is a free tool that makes it easy to install software on your Mac. You might already have it. Let's check &mdash; paste this into Terminal:</p>
-          <div class="code-block">
-            <pre><code>brew --version</code></pre>
-            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- SECTION 2: HOW IT WORKS                            -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section>
+      <div class="container">
+        <h2>How It Works</h2>
+        <p>Your Mac gets two modes. Switch between them with a single tap.</p>
+
+        <div class="modes-grid">
+          <div class="mode-card">
+            <div class="mode-icon">&#x1F50B;</div>
+            <div class="mode-title">Desk Mode</div>
+            <p class="mode-detail">Battery holds at 70%</p>
+            <p class="mode-detail">Mac runs on wall power</p>
+            <span class="mode-led led-green"><span class="led-dot"></span> MagSafe LED green</span>
           </div>
-          <p>If you see a version number (like <code>Homebrew 4.x.x</code>), you're good &mdash; skip to Step 2.</p>
-          <p>If you see "command not found," install Homebrew by pasting this:</p>
-          <div class="code-block">
-            <pre><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
-            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
-          </div>
-          <div class="callout">
-            <p><strong>After it finishes:</strong> Homebrew will display a few lines telling you to run commands to add it to your PATH. Follow those instructions, then <strong>close and reopen Terminal</strong> before continuing.</p>
+          <div class="mode-card">
+            <div class="mode-icon">&#x26A1;</div>
+            <div class="mode-title">Mobile Mode</div>
+            <p class="mode-detail">One tap charges to 100%</p>
+            <p class="mode-detail">Full battery for the road</p>
+            <span class="mode-led led-amber"><span class="led-dot"></span> MagSafe LED amber</span>
           </div>
         </div>
-      </div>
 
-      <!-- Step 2 -->
-      <div class="step">
-        <span class="step-number">2</span>
-        <h3>Install batt</h3>
-        <div class="step-content">
-          <p><a href="https://github.com/charlie0129/batt">batt</a> is a free, open-source tool that controls your MacBook's charging. It's lightweight, has no ads or telemetry, and runs quietly in the background. Over 1,500 people use it on GitHub.</p>
-          <p>Install it:</p>
-          <div class="code-block">
-            <pre><code>brew install batt</code></pre>
-            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
-          </div>
-          <p>Then start the background service that keeps it running (including after restarts):</p>
-          <div class="code-block">
-            <pre><code>sudo brew services start batt</code></pre>
-            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
-          </div>
-          <div class="callout">
-            <p><strong>It will ask for your password.</strong> This is your Mac login password. When you type it, nothing will appear on screen &mdash; that's normal. Just type it and press Enter.</p>
-          </div>
-          <p><strong>What success looks like:</strong> You should see a message like <code>==&gt; Successfully started batt</code>.</p>
-        </div>
+        <p class="reassurance">Your Mac works exactly the same in both modes. No performance difference.</p>
       </div>
+    </section>
 
-      <!-- Step 3 -->
-      <div class="step">
-        <span class="step-number">3</span>
-        <h3>Set your charge limit</h3>
-        <div class="step-content">
-          <p>Now tell batt to cap your battery. The most common choices are 70% or 80%:</p>
-          <ul style="margin: 12px 0 12px 24px; line-height: 2">
-            <li><strong>70%</strong> &mdash; Best for longevity. Great if your Mac rarely leaves the desk.</li>
-            <li><strong>80%</strong> &mdash; Good balance between longevity and having more charge when you unplug.</li>
-          </ul>
-          <p>Pick one and paste the command. Here's 70%:</p>
-          <div class="code-block">
-            <pre><code>batt limit 70</code></pre>
-            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- SECTION 3: THE SCIENCE                             -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section>
+      <div class="container">
+        <h2>The Science</h2>
+
+        <ul class="science-list">
+          <li><strong>High voltage degrades batteries.</strong> Keeping a lithium-ion cell above 80% charge puts constant stress on the cathode, accelerating chemical breakdown. Lower charge = lower voltage = less stress.</li>
+          <li><strong>Every laptop maker knows this.</strong> Apple, Lenovo, Dell, and ASUS all ship some form of charge limiting. The science is settled &mdash; it's just not turned on by default.</li>
+          <li><strong>The numbers are significant.</strong> Batteries held at 70&ndash;80% retain roughly 96% of their capacity after two years. At 100%, that drops to around 80%. That's the difference between a 6-year battery and a 3-year one.</li>
+        </ul>
+
+        <details>
+          <summary>Research citations</summary>
+          <div class="details-body">
+            <p><strong>Battery University BU-808</strong> &mdash; "How to Prolong Lithium-based Batteries." Comprehensive overview of voltage stress, depth of discharge, and temperature effects on cell longevity. <a href="https://batteryuniversity.com/article/bu-808-how-to-prolong-lithium-based-batteries" target="_blank" rel="noopener">Read article</a></p>
+            <p><strong>Choi &amp; Lim (2002)</strong> &mdash; "Factors that affect cycle-life and possible degradation mechanisms of a Li-ion cell based on LiCoO2." Journal of Power Sources. Demonstrated that higher upper charge voltage significantly reduces cycle life.</p>
+            <p><strong>Wikner &amp; Thiringer (2018)</strong> &mdash; "Extending Battery Lifetime by Avoiding High SOC." Applied Energy. Calendar aging study showing that state-of-charge is the dominant factor in capacity fade, even more than cycling.</p>
+            <p><strong>Dahn Lab, Dalhousie University (2019&ndash;2022)</strong> &mdash; Multiple studies on long-term degradation of NMC and LFP cells. Confirmed that reducing upper charge voltage from 4.2V to 4.0V (roughly 100% to 70%) can more than double calendar life.</p>
+            <p><strong>Apple Technical Support</strong> &mdash; Apple's own documentation acknowledges that "charging your battery to full and keeping it there for extended periods can be detrimental," which is why they introduced Optimized Battery Charging.</p>
           </div>
-          <p>Or for 80%:</p>
-          <div class="code-block">
-            <pre><code>batt limit 80</code></pre>
-            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
-          </div>
-          <p>Verify it's working:</p>
-          <div class="code-block">
-            <pre><code>batt status</code></pre>
-            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
-          </div>
-          <p><strong>What success looks like:</strong> You'll see output including <code>Upper limit: 70%</code> (or whatever you chose). Your Mac will stop charging once it reaches that level.</p>
-        </div>
+        </details>
       </div>
+    </section>
 
-      <!-- Step 4 -->
-      <div class="step">
-        <span class="step-number">4</span>
-        <h3>Disable Apple's Optimized Battery Charging</h3>
-        <div class="step-content">
-          <p>Apple has its own battery management feature that conflicts with batt. You need to turn it off so the two don't fight each other.</p>
-          <div class="nav-path">
-            System Settings <span>&rarr;</span> Battery <span>&rarr;</span> Battery Health <span>&rarr;</span> click the <strong>(i)</strong> info button <span>&rarr;</span> toggle <strong>OFF</strong> "Optimized Battery Charging"
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- SECTION 4: ENVIRONMENTAL CASE                      -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="environment">
+      <div class="container">
+        <h2>The Environmental Case</h2>
+        <p style="color: var(--dark-muted);">Battery degradation isn't just an inconvenience. It's part of a global extraction and waste cycle.</p>
+
+        <div class="env-stats">
+          <div class="stat">
+            <span class="stat-number">6&ndash;8g</span>
+            <span class="stat-label">Lithium per MacBook battery &mdash; mined from fragile desert ecosystems</span>
           </div>
-          <div class="callout warning">
-            <p><strong>Don't skip this.</strong> If you leave Apple's feature on, it may override your charge limit and charge to 100% unpredictably.</p>
+          <div class="stat">
+            <span class="stat-number">70%</span>
+            <span class="stat-label">Of global cobalt comes from the DRC, often from artisanal mines with severe human costs</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">~80kg</span>
+            <span class="stat-label">CO&#8322; emitted manufacturing each replacement battery and shipping it to you</span>
           </div>
         </div>
-      </div>
 
-      <!-- Step 5 -->
-      <div class="step">
-        <span class="step-number">5</span>
-        <h3>Create the toggle script</h3>
-        <div class="step-content">
-          <p>This creates a small script on your Mac that flips between your desk limit and 100%. You'll use it whenever you need to go mobile (or come back).</p>
-          <p>If you chose <strong>70%</strong> as your limit, paste this entire block:</p>
-          <div class="code-block">
-            <pre><code>mkdir -p ~/bin && cat > ~/bin/toggle-battery-limit.sh << 'SCRIPT'
+        <details>
+          <summary>E-waste by the numbers</summary>
+          <div class="details-body">
+            <p><strong>62 million tonnes</strong> of electronic waste were generated globally in 2022, making it the fastest-growing waste stream on the planet.</p>
+            <p><strong>Only 22%</strong> of e-waste is documented as properly collected and recycled. The rest goes to landfills, informal recycling, or is unaccounted for.</p>
+            <p><strong>Battery chemicals leach.</strong> Lithium, cobalt, nickel, and manganese from improperly disposed batteries contaminate soil and groundwater. A single laptop battery can affect thousands of liters of water.</p>
+            <p>Every battery that doesn't need to be replaced is one that doesn't need to be mined, manufactured, shipped, and eventually disposed of.</p>
+          </div>
+        </details>
+
+        <!-- Impact Calculator -->
+        <div class="calculator">
+          <h3>What if more people did this?</h3>
+          <p class="calc-label">Move the slider to see the impact if a percentage of MacBook users adopted charge limiting:</p>
+
+          <div class="calc-slider-row">
+            <input type="range" id="adoption-slider" min="1" max="100" value="10" aria-label="Adoption percentage">
+            <span class="calc-pct" id="adoption-value">10%</span>
+          </div>
+
+          <div class="calc-results">
+            <div class="calc-result">
+              <span class="calc-result-number" id="calc-replacements">550K</span>
+              <span class="calc-result-label">battery replacements avoided per year</span>
+            </div>
+            <div class="calc-result">
+              <span class="calc-result-number" id="calc-co2">38,500</span>
+              <span class="calc-result-label">tonnes CO&#8322; saved per year</span>
+            </div>
+            <div class="calc-result">
+              <span class="calc-result-number" id="calc-lithium">3,850</span>
+              <span class="calc-result-label">kg lithium kept in the ground</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- SECTION 5: SETUP — CHOOSE YOUR PATH                -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="setup" id="setup">
+      <div class="container-wide">
+        <h2>Set It Up</h2>
+        <p>Two ways to get started. Both take about 10 minutes and work on any Apple Silicon Mac (M1&ndash;M4).</p>
+
+        <div class="path-grid">
+
+          <!-- ── PATH A: Claude-Assisted ── -->
+          <div class="path-card recommended">
+            <span class="path-badge">Recommended</span>
+            <div class="path-title">Let Claude set it up</div>
+            <p class="path-desc">Paste one command, then hand it off to Claude AI. It'll walk you through everything, handle errors, and explain as it goes.</p>
+
+            <div class="guided-step" id="guided-step-1">
+              <div class="guided-step-header">
+                <span class="guided-num"><span>1</span></span>
+                <h4>Open Terminal</h4>
+              </div>
+              <p style="font-size:0.92rem; color: var(--text-muted);">Terminal is an app already on your Mac. Find it at:</p>
+              <div class="nav-path">
+                Applications <span>&rarr;</span> Utilities <span>&rarr;</span> Terminal
+              </div>
+              <p style="font-size:0.92rem; color: var(--text-muted);">Or press <code>Cmd + Space</code>, type "Terminal", and hit Enter.</p>
+              <button class="step-next-btn" data-next="guided-step-2" aria-label="Mark step 1 done and show step 2">Done &mdash; next &rarr;</button>
+            </div>
+
+            <div class="guided-step hidden" id="guided-step-2">
+              <div class="guided-step-header">
+                <span class="guided-num"><span>2</span></span>
+                <h4>Paste this command</h4>
+              </div>
+              <p style="font-size:0.92rem; color: var(--text-muted);">Copy the entire block below and paste it into Terminal. Press Enter and wait for it to finish (a few minutes).</p>
+              <div class="code-block">
+                <pre><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &amp;&amp; eval "$(/opt/homebrew/bin/brew shellenv)" &amp;&amp; brew install batt &amp;&amp; sudo brew services start batt &amp;&amp; batt limit 80</code></pre>
+                <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+              </div>
+              <div class="callout">
+                <p><strong>It will ask for your password.</strong> This is your Mac login password. When you type it, nothing appears on screen &mdash; that's normal. Just type it and press Enter.</p>
+              </div>
+              <button class="step-next-btn" data-next="guided-step-3" aria-label="Mark step 2 done and show step 3">Done &mdash; next &rarr;</button>
+            </div>
+
+            <div class="guided-step hidden" id="guided-step-3">
+              <div class="guided-step-header">
+                <span class="guided-num"><span>3</span></span>
+                <h4>Hand it off to Claude</h4>
+              </div>
+              <p style="font-size:0.92rem; color: var(--text-muted);">Go to <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> (free) and paste this prompt. Claude will verify everything, help you pick settings, and finish the setup:</p>
+              <div class="code-block">
+                <pre><code>I just installed batt on my MacBook using this command from betterbattery.org:
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &amp;&amp; eval "$(/opt/homebrew/bin/brew shellenv)" &amp;&amp; brew install batt &amp;&amp; sudo brew services start batt &amp;&amp; batt limit 80
+
+Help me complete the BetterBattery setup:
+
+1. Check if batt is working (run "batt status")
+2. Help me choose 70% or 80% as my desk charge limit
+3. Create a toggle script at ~/bin/toggle-battery-limit.sh that switches between desk mode (my limit) and mobile mode (100%), with macOS notifications
+4. Create an auto-drain monitor at ~/bin/batt-monitor.sh — it should check every 60 seconds if my battery is above the limit and drain it automatically using "batt adapter disable/enable". Set up a launchd agent so it runs in the background
+5. Walk me through creating a macOS Shortcut to toggle from the menu bar with one tap
+6. Help me disable Apple's Optimized Battery Charging (it conflicts with batt)
+7. Tell me what to expect day-to-day (MagSafe LED colors, battery behavior, etc.)
+
+I'm not technical — give me exact commands to paste and explain each one.</code></pre>
+                <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+              </div>
+              <p style="font-size:0.92rem; color: var(--text-muted);">Claude will walk you through the rest. If anything went wrong in step 2, Claude will troubleshoot it.</p>
+            </div>
+          </div>
+
+          <!-- ── PATH B: Do It Yourself ── -->
+          <div class="path-card">
+            <div class="path-title">Do it yourself</div>
+            <p class="path-desc">Step-by-step guide with every command written out. For people comfortable with Terminal.</p>
+
+            <!-- DIY Step 1 -->
+            <div class="diy-step">
+              <details>
+                <summary>1. Install Homebrew</summary>
+                <div class="details-body">
+                  <p>Check if it's already installed:</p>
+                  <div class="code-block">
+                    <pre><code>brew --version</code></pre>
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                  </div>
+                  <p>If you see a version number, skip to step 2. If you see "command not found," install it:</p>
+                  <div class="code-block">
+                    <pre><code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre>
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                  </div>
+                  <div class="callout">
+                    <p><strong>After it finishes:</strong> Homebrew will display lines telling you to run commands to add it to your PATH. Follow those instructions, then <strong>close and reopen Terminal</strong> before continuing.</p>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <!-- DIY Step 2 -->
+            <div class="diy-step">
+              <details>
+                <summary>2. Install batt</summary>
+                <div class="details-body">
+                  <p><a href="https://github.com/charlie0129/batt" target="_blank" rel="noopener">batt</a> is a free, open-source tool that controls your MacBook's charging. No ads, no telemetry, runs locally.</p>
+                  <div class="code-block">
+                    <pre><code>brew install batt</code></pre>
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                  </div>
+                  <p>Start the background service:</p>
+                  <div class="code-block">
+                    <pre><code>sudo brew services start batt</code></pre>
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                  </div>
+                  <div class="callout">
+                    <p><strong>Password prompt:</strong> Type your Mac login password. Nothing appears as you type &mdash; that's normal. Press Enter.</p>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <!-- DIY Step 3 -->
+            <div class="diy-step">
+              <details>
+                <summary>3. Set your charge limit</summary>
+                <div class="details-body">
+                  <p><strong>70%</strong> &mdash; Best for longevity. Great if your Mac rarely leaves the desk.<br>
+                  <strong>80%</strong> &mdash; Good balance if you unplug a few times a week.</p>
+                  <p>For 70%:</p>
+                  <div class="code-block">
+                    <pre><code>batt limit 70</code></pre>
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                  </div>
+                  <p>Or for 80%:</p>
+                  <div class="code-block">
+                    <pre><code>batt limit 80</code></pre>
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                  </div>
+                  <p>Verify it's working:</p>
+                  <div class="code-block">
+                    <pre><code>batt status</code></pre>
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                  </div>
+                  <p>You should see <code>Upper limit: 70%</code> (or 80%) in the output.</p>
+                </div>
+              </details>
+            </div>
+
+            <!-- DIY Step 4 -->
+            <div class="diy-step">
+              <details>
+                <summary>4. Disable Apple's battery management</summary>
+                <div class="details-body">
+                  <p>Apple's built-in battery feature conflicts with batt. Turn it off:</p>
+                  <div class="nav-path">
+                    System Settings <span>&rarr;</span> Battery <span>&rarr;</span> Battery Health <span>&rarr;</span> <strong>(i)</strong> <span>&rarr;</span> toggle <strong>OFF</strong> "Optimized Battery Charging"
+                  </div>
+                  <div class="callout warning">
+                    <p><strong>Don't skip this.</strong> If left on, Apple's feature may override your limit and charge to 100% unpredictably.</p>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <!-- DIY Step 5 -->
+            <div class="diy-step">
+              <details>
+                <summary>5. Create the toggle script</summary>
+                <div class="details-body">
+                  <p>This script flips between your desk limit and 100% (mobile mode). For <strong>70%</strong>:</p>
+                  <div class="code-block">
+                    <pre><code>mkdir -p ~/bin &amp;&amp; cat > ~/bin/toggle-battery-limit.sh &lt;&lt; 'SCRIPT'
 #!/bin/zsh
-CURRENT=$(/opt/homebrew/bin/batt status 2>&1)
+CURRENT=$(/opt/homebrew/bin/batt status 2>&amp;1)
 if echo "$CURRENT" | grep -q "Upper limit: 70%"; then
-    /opt/homebrew/bin/batt limit 100 2>&1
-    osascript -e 'display notification "Charging to 100% — Mobile Mode" with title "🔋 Battery"'
+    /opt/homebrew/bin/batt limit 100 2>&amp;1
+    osascript -e 'display notification "Charging to 100% — Mobile Mode" with title "Battery"'
 else
-    /opt/homebrew/bin/batt limit 70 2>&1
-    osascript -e 'display notification "Capped at 70% — Desk Mode" with title "🔋 Battery"'
+    /opt/homebrew/bin/batt limit 70 2>&amp;1
+    osascript -e 'display notification "Capped at 70% — Desk Mode" with title "Battery"'
 fi
 SCRIPT
 chmod +x ~/bin/toggle-battery-limit.sh</code></pre>
-            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
-          </div>
-          <p>If you chose <strong>80%</strong>, paste this version instead:</p>
-          <div class="code-block">
-            <pre><code>mkdir -p ~/bin && cat > ~/bin/toggle-battery-limit.sh << 'SCRIPT'
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                  </div>
+                  <p>For <strong>80%</strong>, use this version instead:</p>
+                  <div class="code-block">
+                    <pre><code>mkdir -p ~/bin &amp;&amp; cat > ~/bin/toggle-battery-limit.sh &lt;&lt; 'SCRIPT'
 #!/bin/zsh
-CURRENT=$(/opt/homebrew/bin/batt status 2>&1)
+CURRENT=$(/opt/homebrew/bin/batt status 2>&amp;1)
 if echo "$CURRENT" | grep -q "Upper limit: 80%"; then
-    /opt/homebrew/bin/batt limit 100 2>&1
-    osascript -e 'display notification "Charging to 100% — Mobile Mode" with title "🔋 Battery"'
+    /opt/homebrew/bin/batt limit 100 2>&amp;1
+    osascript -e 'display notification "Charging to 100% — Mobile Mode" with title "Battery"'
 else
-    /opt/homebrew/bin/batt limit 80 2>&1
-    osascript -e 'display notification "Capped at 80% — Desk Mode" with title "🔋 Battery"'
+    /opt/homebrew/bin/batt limit 80 2>&amp;1
+    osascript -e 'display notification "Capped at 80% — Desk Mode" with title "Battery"'
 fi
 SCRIPT
 chmod +x ~/bin/toggle-battery-limit.sh</code></pre>
-            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                  </div>
+                  <p>No output means it worked.</p>
+                </div>
+              </details>
+            </div>
+
+            <!-- DIY Step 6 -->
+            <div class="diy-step">
+              <details>
+                <summary>6. Install the auto-drain monitor</summary>
+                <div class="details-body">
+                  <p>This script runs in the background and automatically drains your battery when it's above your limit &mdash; for example, after a shutdown charges it to 100%. Without this, you'd have to wait for natural drain.</p>
+                  <p>Create the monitor script:</p>
+                  <div class="code-block">
+                    <pre><code>cat > ~/bin/batt-monitor.sh &lt;&lt; 'SCRIPT'
+#!/bin/zsh
+# batt-monitor.sh — Auto-drain battery to target limit
+BATT="/opt/homebrew/bin/batt"
+LOG_TAG="batt-monitor"
+
+STATUS=$($BATT status 2>&amp;1)
+UPPER=$(echo "$STATUS" | grep "Upper limit:" | grep -oE '[0-9]+')
+LOWER=$(echo "$STATUS" | grep "Lower limit:" | grep -oE '[0-9]+')
+
+# Mobile mode (100%) — make sure adapter is on, exit
+if [ "$UPPER" = "100" ]; then
+    ADAPTER_DISABLED=$(echo "$STATUS" | grep "Use power adapter" | grep -c "✘")
+    if [ "$ADAPTER_DISABLED" -eq 1 ]; then
+        $BATT adapter enable >/dev/null 2>&amp;1
+        logger -t "$LOG_TAG" "Mobile mode — re-enabled adapter"
+    fi
+    exit 0
+fi
+
+CHARGE=$(echo "$STATUS" | grep "Current charge:" | grep -oE '[0-9]+')
+
+if [ -z "$UPPER" ] || [ -z "$LOWER" ] || [ -z "$CHARGE" ]; then
+    logger -t "$LOG_TAG" "Could not read batt status — skipping"
+    exit 0
+fi
+
+ADAPTER_DISABLED=$(echo "$STATUS" | grep "Use power adapter" | grep -c "✘")
+
+if [ "$ADAPTER_DISABLED" -eq 1 ]; then
+    if [ "$CHARGE" -le "$LOWER" ]; then
+        $BATT adapter enable >/dev/null 2>&amp;1
+        logger -t "$LOG_TAG" "Reached ${CHARGE}% (lower ${LOWER}%) — re-enabled adapter"
+    fi
+elif [ "$CHARGE" -gt "$UPPER" ]; then
+    $BATT adapter disable >/dev/null 2>&amp;1
+    logger -t "$LOG_TAG" "At ${CHARGE}% (above ${UPPER}%) — disabled adapter to drain"
+fi
+SCRIPT
+chmod +x ~/bin/batt-monitor.sh</code></pre>
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                  </div>
+                  <p>Now create a background agent that runs it every 60 seconds:</p>
+                  <div class="code-block">
+                    <pre><code>cat > ~/Library/LaunchAgents/com.betterbattery.monitor.plist &lt;&lt; PLIST
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+    &lt;key&gt;Label&lt;/key&gt;
+    &lt;string&gt;com.betterbattery.monitor&lt;/string&gt;
+    &lt;key&gt;ProgramArguments&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;/bin/zsh&lt;/string&gt;
+        &lt;string&gt;/Users/$(whoami)/bin/batt-monitor.sh&lt;/string&gt;
+    &lt;/array&gt;
+    &lt;key&gt;StartInterval&lt;/key&gt;
+    &lt;integer&gt;60&lt;/integer&gt;
+    &lt;key&gt;RunAtLoad&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;StandardErrorPath&lt;/key&gt;
+    &lt;string&gt;/tmp/batt-monitor.err&lt;/string&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+PLIST</code></pre>
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                  </div>
+                  <p>Load it:</p>
+                  <div class="code-block">
+                    <pre><code>launchctl load ~/Library/LaunchAgents/com.betterbattery.monitor.plist</code></pre>
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                  </div>
+                  <p>Verify it's running:</p>
+                  <div class="code-block">
+                    <pre><code>launchctl list | grep betterbattery</code></pre>
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                  </div>
+                  <p>You should see a line with <code>com.betterbattery.monitor</code>. The monitor will now keep your battery at your target automatically.</p>
+                </div>
+              </details>
+            </div>
+
+            <!-- DIY Step 7 -->
+            <div class="diy-step">
+              <details>
+                <summary>7. Create a macOS Shortcut</summary>
+                <div class="details-body">
+                  <p>First, find your username:</p>
+                  <div class="code-block">
+                    <pre><code>whoami</code></pre>
+                    <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                  </div>
+                  <p>Open the <strong>Shortcuts</strong> app (<code>Cmd + Space</code>, type "Shortcuts") and:</p>
+                  <ol style="margin: 12px 0 12px 24px; line-height: 2.2; font-size: 0.92rem;">
+                    <li>Click <strong>"Menu Bar"</strong> in the left sidebar</li>
+                    <li>Click <strong>+</strong> to create a new shortcut</li>
+                    <li>Search for <strong>"Run Shell Script"</strong> and add it</li>
+                    <li>Set Shell to <strong>zsh</strong></li>
+                    <li>Enter: <code>/Users/USERNAME/bin/toggle-battery-limit.sh</code><br>(replace USERNAME with your <code>whoami</code> result)</li>
+                    <li>Leave <strong>"Run as Administrator"</strong> unchecked</li>
+                    <li>Rename to <strong>"Toggle Battery Limit"</strong></li>
+                  </ol>
+                  <p>You'll now see it in your menu bar under the Shortcuts icon.</p>
+                </div>
+              </details>
+            </div>
+
+            <!-- DIY Step 8 -->
+            <div class="diy-step">
+              <details>
+                <summary>8. Add to Control Center (optional)</summary>
+                <div class="details-body">
+                  <ol style="margin: 12px 0 12px 24px; line-height: 2.2; font-size: 0.92rem;">
+                    <li>Open <strong>Control Center</strong> (click the icon in your menu bar)</li>
+                    <li>Click the <strong>+</strong> at the bottom left</li>
+                    <li>Find and add <strong>Shortcuts</strong></li>
+                    <li>Select <strong>"Toggle Battery Limit"</strong></li>
+                  </ol>
+                  <p>Now you can toggle with one tap from Control Center.</p>
+                </div>
+              </details>
+            </div>
+
           </div>
-          <p><strong>What success looks like:</strong> No output means it worked. The script is saved and ready to use.</p>
         </div>
       </div>
+    </section>
 
-      <!-- Step 6 -->
-      <div class="step">
-        <span class="step-number">6</span>
-        <h3>Create a macOS Shortcut for one-tap toggling</h3>
-        <div class="step-content">
-          <p>Now let's make it so you can toggle with a single tap from your menu bar &mdash; no Terminal needed day-to-day.</p>
-          <p>First, find your username. Paste this in Terminal and note the result:</p>
-          <div class="code-block">
-            <pre><code>whoami</code></pre>
-            <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- SECTION 6: WHAT TO EXPECT                          -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section>
+      <div class="container">
+        <h2>What to Expect</h2>
+        <p>After setup, here's what you'll notice day-to-day:</p>
+
+        <ul class="expect-list" style="margin-top: 24px;">
+          <li>
+            <span class="expect-icon">&#x26A1;</span>
+            <div class="expect-text">
+              <strong>The lightning bolt stays.</strong>
+              The battery icon in your menu bar will still show a lightning bolt (&#x26A1;) when plugged in. That means "connected to power," not "currently charging." This is normal.
+            </div>
+          </li>
+          <li>
+            <span class="expect-icon">&#x1F7E2;</span>
+            <div class="expect-text">
+              <strong>MagSafe LED colors.</strong>
+              Green means your battery is at the limit and holding. Amber means it's actively charging (either toward your limit or toward 100% in mobile mode).
+            </div>
+          </li>
+          <li>
+            <span class="expect-icon">&#x1F504;</span>
+            <div class="expect-text">
+              <strong>Small cycling is normal.</strong>
+              Your battery might drift between 68% and 70% (or 78% and 80%). This tiny range is normal and healthy &mdash; batt lets it fluctuate slightly to avoid constant micro-charging.
+            </div>
+          </li>
+          <li>
+            <span class="expect-icon">&#x1F4C9;</span>
+            <div class="expect-text">
+              <strong>Battery above limit will auto-drain.</strong>
+              If your Mac charges to 100% during a shutdown, the auto-drain monitor will notice and gently drain it back to your limit by disabling the power adapter temporarily. You might see the percentage dropping — that's the monitor doing its job.
+            </div>
+          </li>
+          <li>
+            <span class="expect-icon">&#x1F50C;</span>
+            <div class="expect-text">
+              <strong>Shutdowns charge to 100%.</strong>
+              When your Mac is fully shut down, batt isn't running, so the hardware charges normally. This is a hardware limitation &mdash; it's fine for occasional shutdowns. The monitor will drain it back when your Mac wakes up.
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- SECTION 7: FAQ / TROUBLESHOOTING                   -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="faq">
+      <div class="container">
+        <h2>Frequently Asked Questions</h2>
+
+        <details>
+          <summary>Will this void my warranty?</summary>
+          <div class="details-body">
+            <p>No. You're not modifying hardware or bypassing security protections. batt communicates with the SMC (System Management Controller) the same way Apple's own tools do. You can uninstall everything in under a minute.</p>
           </div>
-          <p>Now open the <strong>Shortcuts</strong> app (search for it in Spotlight with <code>Cmd + Space</code>) and follow these steps:</p>
-          <ol style="margin: 12px 0 12px 24px; line-height: 2.2">
-            <li>Click <strong>"Menu Bar"</strong> in the left sidebar. Creating a shortcut here automatically pins it to your menu bar.</li>
-            <li>Click the <strong>+</strong> button to create a new shortcut.</li>
-            <li>In the search panel on the right, search for <strong>"Run Shell Script"</strong> and add it.</li>
-            <li>Set the Shell to <strong>zsh</strong>.</li>
-            <li>In the script body, type: <code>/Users/USERNAME/bin/toggle-battery-limit.sh</code><br>Replace <strong>USERNAME</strong> with the result from <code>whoami</code> above.</li>
-            <li>Make sure <strong>"Run as Administrator"</strong> is <strong>unchecked</strong>.</li>
-            <li>Rename the shortcut to <strong>"Toggle Battery Limit"</strong> (click the name at the top).</li>
-          </ol>
-          <p><strong>What success looks like:</strong> You now have a "Toggle Battery Limit" shortcut in your menu bar. Click the Shortcuts icon in the menu bar and you'll see it listed.</p>
-        </div>
-      </div>
+        </details>
 
-      <!-- Step 7 -->
-      <div class="step">
-        <span class="step-number">7</span>
-        <h3>Add to Control Center (optional)</h3>
-        <div class="step-content">
-          <p>For even quicker access, you can add your shortcut to Control Center:</p>
-          <ol style="margin: 12px 0 12px 24px; line-height: 2.2">
-            <li>Open <strong>Control Center</strong> (click the icon in your menu bar).</li>
-            <li>Click the <strong>+</strong> at the bottom left.</li>
-            <li>Find and add <strong>Shortcuts</strong>.</li>
-            <li>Select <strong>"Toggle Battery Limit"</strong>.</li>
-          </ol>
-          <p>Now you can toggle your battery limit from Control Center with a single tap.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        <details>
+          <summary>Is batt safe?</summary>
+          <div class="details-body">
+            <p>Yes. It's open source with over 1,500 stars on GitHub, meaning its code is public and auditable. It collects no data, has no telemetry, requires no internet connection, and runs entirely on your Mac. <a href="https://github.com/charlie0129/batt" target="_blank" rel="noopener">View on GitHub</a></p>
+          </div>
+        </details>
 
-  <!-- Day-to-Day Usage -->
-  <section>
-    <div class="container">
-      <h2>Day-to-Day Usage</h2>
-      <p>Most days, you do absolutely nothing. Your Mac charges to your limit and stays there, running off wall power like a desktop.</p>
-      <p>When you need to go mobile:</p>
-      <ol style="margin: 12px 0 12px 24px; line-height: 2.2">
-        <li><strong>Tap the toggle</strong> from your menu bar or Control Center. You'll get a notification: "Charging to 100% &mdash; Mobile Mode."</li>
-        <li><strong>Wait for it to charge</strong>, then unplug and go.</li>
-        <li><strong>When you're back at your desk</strong>, plug in and tap the toggle again. You'll get: "Capped at 70% &mdash; Desk Mode."</li>
-      </ol>
-      <p>That's it. The batt service survives restarts &mdash; it remembers your last limit and the daemon starts automatically on boot. Sleep is handled too: batt disables charging before your Mac sleeps to prevent overnight charge-ups.</p>
-    </div>
-  </section>
+        <details>
+          <summary>Should I pick 70% or 80%?</summary>
+          <div class="details-body">
+            <p><strong>70%</strong> is better for long-term battery health. <strong>80%</strong> gives you more charge when you unplug. Both are significantly better than 100%. If your Mac rarely leaves your desk, go with 70%. If you unplug a few times a week, 80% gives you more buffer.</p>
+          </div>
+        </details>
 
-  <!-- FAQ -->
-  <section>
-    <div class="container">
-      <h2>Frequently Asked Questions</h2>
+        <details>
+          <summary>What about Apple's built-in charge limit?</summary>
+          <div class="details-body">
+            <p>Recent versions of macOS (Sonoma 14.4 and later) include a built-in 80% charge limit option. It works, but batt gives you more control: any percentage you want, a toggle script for desk/mobile mode, and the auto-drain monitor that actively manages your battery. If you prefer Apple's native option, it's a fine choice too &mdash; 80% is far better than 100%.</p>
+          </div>
+        </details>
 
-      <div class="faq-item">
-        <h3>Will this void my warranty?</h3>
-        <p>No. You're not modifying hardware or bypassing security protections. batt communicates with the SMC (System Management Controller) the same way Apple's own tools do. You can uninstall it completely in under a minute.</p>
-      </div>
+        <details>
+          <summary>Does this work on Intel Macs?</summary>
+          <div class="details-body">
+            <p>No. batt only works on Apple Silicon Macs (M1, M2, M3, M4). If you have an Intel Mac, look into <a href="https://apphousekitchen.com/" target="_blank" rel="noopener">AlDente</a>, which supports both Intel and Apple Silicon.</p>
+          </div>
+        </details>
 
-      <div class="faq-item">
-        <h3>Is batt safe?</h3>
-        <p>Yes. It's open source with over 1,500 stars on GitHub, meaning its code is public and auditable. It collects no data, has no telemetry, requires no internet connection, and runs entirely on your Mac.</p>
-      </div>
+        <details>
+          <summary>Does this work on Windows or Linux?</summary>
+          <div class="details-body">
+            <p>No &mdash; batt and this guide are for Apple Silicon Macs only. For Windows laptops, check your manufacturer's battery management software (Lenovo Vantage, Dell Power Manager, ASUS MyASUS, HP Command Center). Many Windows laptops have built-in charge limiting in their BIOS or companion apps. The same science applies &mdash; keeping any laptop battery at 70&ndash;80% extends its life regardless of platform.</p>
+          </div>
+        </details>
 
-      <div class="faq-item">
-        <h3>Should I pick 70% or 80%?</h3>
-        <p>70% is better for long-term battery health. 80% gives you more charge when you unplug. Both are significantly better than leaving it at 100%. If your Mac rarely leaves your desk, go with 70%. If you unplug a few times a week, 80% gives you more buffer.</p>
-      </div>
+        <details>
+          <summary>Can I change the limit later?</summary>
+          <div class="details-body">
+            <p>Anytime. Run <code>batt limit XX</code> with your new number. If you made a toggle script, also update the percentage inside it.</p>
+          </div>
+        </details>
 
-      <div class="faq-item">
-        <h3>Can I change the limit later?</h3>
-        <p>Anytime. Just open Terminal and run <code>batt limit XX</code> with your new number. If you made a toggle script, you'll also want to update the number inside it.</p>
-      </div>
+        <details>
+          <summary>What about sleep or closing the lid?</summary>
+          <div class="details-body">
+            <p>Handled. batt disables charging before sleep to prevent your Mac from quietly charging to 100% overnight. When it wakes, the limit is re-applied automatically.</p>
+          </div>
+        </details>
 
-      <div class="faq-item">
-        <h3>What happens when my Mac is shut down?</h3>
-        <p>When fully shut down, batt isn't running, so the Mac charges normally up to 100%. This is a hardware limitation &mdash; the SMC handles charging during shutdown independently. This is fine for occasional shutdowns; just plug in after booting back up and it will hold at your limit.</p>
-      </div>
+        <details>
+          <summary>Something isn't working &mdash; how do I troubleshoot?</summary>
+          <div class="details-body">
+            <p>Go to <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> and tell it: "I followed the BetterBattery guide at betterbattery.org and [describe what's wrong]. Help me fix it." Claude can run diagnostics, check your configuration, and walk you through fixes.</p>
+          </div>
+        </details>
 
-      <div class="faq-item">
-        <h3>What about sleep or closing the lid?</h3>
-        <p>Handled. batt disables charging before sleep to prevent your Mac from quietly charging to 100% overnight. When it wakes, the limit is re-applied automatically.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Does this work on Intel Macs?</h3>
-        <p>No. batt only works on Apple Silicon Macs (M1, M2, M3, M4). Intel Macs use a different SMC interface that batt doesn't support.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3>How do I uninstall everything?</h3>
-        <p>Three commands in Terminal and you're done:</p>
-        <div class="code-block">
-          <pre><code>sudo brew services stop batt
+        <details>
+          <summary>How do I uninstall everything?</summary>
+          <div class="details-body">
+            <p>Six commands in Terminal removes everything:</p>
+            <div class="code-block">
+              <pre><code>sudo brew services stop batt
 brew uninstall batt
-rm ~/bin/toggle-battery-limit.sh</code></pre>
-          <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+rm ~/bin/toggle-battery-limit.sh
+rm ~/bin/batt-monitor.sh
+launchctl unload ~/Library/LaunchAgents/com.betterbattery.monitor.plist
+rm ~/Library/LaunchAgents/com.betterbattery.monitor.plist</code></pre>
+              <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+            </div>
+            <p>Then go to System Settings &rarr; Battery &rarr; Battery Health and turn <strong>Optimized Battery Charging</strong> back on. Delete the Shortcut you created in the Shortcuts app.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Keep batt updated</summary>
+          <div class="details-body">
+            <p>batt is actively maintained. To update, run <code>brew upgrade batt</code> in Terminal occasionally. Updates add new macOS compatibility and bug fixes.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- CLOSING IMPACT                                     -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <section class="closing">
+      <div class="container">
+        <h2>Your MacBook battery is dying<br>while it sits on your desk.</h2>
+        <p class="subtitle">Over 100 million MacBooks sit plugged in right now, batteries held at 100% &mdash; slowly degrading. Every worn-out battery means more lithium mining, more manufacturing emissions, and more e-waste. A simple change can double your battery's lifespan.</p>
+
+        <div class="stats-grid">
+          <div class="stat">
+            <span class="stat-number">2&times;</span>
+            <span class="stat-label">Longer battery life at 70&ndash;80% charge</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">$199+</span>
+            <span class="stat-label">Apple battery replacement cost</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">100M+</span>
+            <span class="stat-label">MacBooks that could benefit</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">78%</span>
+            <span class="stat-label">Of e-waste never gets recycled</span>
+          </div>
         </div>
-        <p>Then go to System Settings &rarr; Battery &rarr; Battery Health and turn <strong>Optimized Battery Charging</strong> back on. Delete the Shortcut you created if you made one.</p>
-      </div>
 
-      <div class="faq-item">
-        <h3>What about hibernatemode?</h3>
-        <p>Your Mac's <code>hibernatemode</code> should be set to 3 (the factory default for MacBooks). If you've changed it at some point, batt's sleep charging protection might not work correctly. You can check with <code>pmset -g | grep hibernatemode</code> in Terminal. If it shows anything other than 3, run <code>sudo pmset -a hibernatemode 3</code> to reset it.</p>
+        <a href="#setup" class="cta-btn">Set it up now &rarr;</a>
       </div>
+    </section>
 
-      <div class="faq-item">
-        <h3>Keep batt updated</h3>
-        <p>batt is actively maintained and updates occasionally add new macOS compatibility. To update, just run <code>brew upgrade batt</code> in Terminal every once in a while.</p>
-      </div>
-    </div>
-  </section>
+  </main>
 
-  <!-- Footer -->
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- FOOTER                                             -->
+  <!-- ═══════════════════════════════════════════════════ -->
   <footer>
     <div class="container">
-      <p>Built with <a href="https://github.com/charlie0129/batt">batt</a> by charlie0129. Open source, GPL-2.0.</p>
+      <p>Built on <a href="https://github.com/charlie0129/batt">batt</a> by charlie0129. Open source, GPL-2.0.</p>
       <p>BetterBattery.org is a free community resource. Not affiliated with Apple.</p>
+      <p style="margin-top: 8px; font-size: 0.8rem;">Environmental data: Global E-waste Monitor 2024, Battery University, USGS Mineral Commodity Summaries.</p>
     </div>
   </footer>
 
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- JAVASCRIPT                                         -->
+  <!-- ═══════════════════════════════════════════════════ -->
   <script>
+    // ── Copy to clipboard ──
     document.querySelectorAll('.copy-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var code = btn.closest('.code-block').querySelector('code').textContent;
@@ -673,6 +1432,55 @@ rm ~/bin/toggle-battery-limit.sh</code></pre>
         });
       });
     });
+
+    // ── Progressive step reveal (Path A) ──
+    document.querySelectorAll('.step-next-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var currentStep = btn.closest('.guided-step');
+        var nextId = btn.getAttribute('data-next');
+        var nextStep = document.getElementById(nextId);
+        if (currentStep && nextStep) {
+          currentStep.classList.add('completed');
+          btn.style.display = 'none';
+          nextStep.classList.remove('hidden');
+          nextStep.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+    });
+
+    // ── Impact calculator ──
+    var slider = document.getElementById('adoption-slider');
+    var pctLabel = document.getElementById('adoption-value');
+    var calcReplacements = document.getElementById('calc-replacements');
+    var calcCo2 = document.getElementById('calc-co2');
+    var calcLithium = document.getElementById('calc-lithium');
+
+    function formatNumber(n) {
+      if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      if (n >= 1000) return (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, '') + 'K';
+      return n.toLocaleString();
+    }
+
+    function updateCalculator() {
+      var pct = parseInt(slider.value);
+      var rate = pct / 100;
+      var macbooks = 33000000;
+
+      // Each adopter avoids ~1 battery replacement per 6 years
+      var replacements = Math.round(rate * macbooks / 6);
+      // ~80kg CO2 per replacement, convert to tonnes
+      var co2 = Math.round(replacements * 80 / 1000);
+      // ~7g lithium per battery, convert to kg
+      var lithium = Math.round(replacements * 7 / 1000);
+
+      pctLabel.textContent = pct + '%';
+      calcReplacements.textContent = formatNumber(replacements);
+      calcCo2.textContent = formatNumber(co2);
+      calcLithium.textContent = formatNumber(lithium);
+    }
+
+    slider.addEventListener('input', updateCalculator);
+    updateCalculator();
   </script>
 
 </body>
