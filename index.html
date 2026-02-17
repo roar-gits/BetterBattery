@@ -154,8 +154,18 @@
     }
 
     .site-title {
+      font-family: 'Fraunces', Georgia, serif;
       font-size: 1.3rem;
+      font-weight: 700;
       margin-bottom: 0;
+      color: var(--text);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .site-title:hover {
+      text-decoration: none;
+      opacity: 0.7;
     }
 
     .header-badge {
@@ -1259,7 +1269,7 @@
     <!-- ═══════════════════════════════════════════════════ -->
     <div class="header-wrap" id="header-wrap">
       <header class="site-header">
-        <h1 class="site-title">BetterBattery</h1>
+        <a href="#" class="site-title" id="logo-link">BetterBattery</a>
         <span class="header-badge">Free &middot; 10 minutes &middot; Apple Silicon Macs</span>
         <a href="#setup" class="header-cta">Set it up</a>
       </header>
@@ -2617,6 +2627,12 @@ rm -rf ~/Library/Services/Toggle\ Battery\ Limit.workflow</code></pre>
     });
 
     updateCalculator();
+
+    // ── Logo scrolls to top ──
+    document.getElementById('logo-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
     // ── "Let's Be Real" progressive disclosure ──
     document.getElementById('lbr-toggle').addEventListener('click', function(e) {
