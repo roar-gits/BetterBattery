@@ -1195,7 +1195,8 @@
                     <div class="triage-question">How do you use Claude?</div>
                     <div class="triage-options">
                       <button class="triage-pill" data-substep="2" data-value="claude-code">Claude Code</button>
-                      <button class="triage-pill" data-substep="2" data-value="claude-web">claude.ai or Mac app</button>
+                      <button class="triage-pill" data-substep="2" data-value="claude-desktop">Claude desktop app</button>
+                      <button class="triage-pill" data-substep="2" data-value="claude-browser">Claude in the browser</button>
                       <button class="triage-pill" data-substep="2" data-value="whats-claude">What's Claude?</button>
                     </div>
 
@@ -1236,9 +1237,17 @@ STEP 6 &mdash; CREATE AUTO-DRAIN MONITOR
 STEP 7 &mdash; CREATE MACOS SHORTCUT
 - Open Shortcuts app &rarr; Menu Bar section &rarr; new shortcut &rarr; "Run Shell Script" action &rarr; set shell to zsh &rarr; enter path to toggle script &rarr; rename to "Toggle Battery Limit"
 
-STEP 8 &mdash; VERIFY &amp; EXPLAIN
+STEP 8 &mdash; SET UP KEYBOARD SHORTCUT (&#x21E7;&#x2318;B)
+- Create an Automator Quick Action (.workflow) in ~/Library/Services/ that runs the toggle script
+- Register &#x21E7;&#x2318;B as the keyboard shortcut via `defaults write pbs NSServicesStatus`
+- Check which of Chrome, Arc, and VS Code are installed &mdash; if any use &#x21E7;&#x2318;B, remap their shortcut to &#x2303;&#x21E7;&#x2318;B (Control+Shift+Command+B) and tell me what you changed
+- Refresh the services cache with /System/Library/CoreServices/pbs -update
+- Tell me if I need to log out and back in for the shortcut to activate
+
+STEP 9 &mdash; VERIFY &amp; EXPLAIN
 - Run batt status (check limit is set)
 - Run launchctl list | grep betterbattery (confirm monitor is running)
+- Test the keyboard shortcut &#x21E7;&#x2318;B and confirm it toggles
 - Tell me what to expect day-to-day: MagSafe LED colors, battery percentage cycling, what happens during shutdowns
 
 Run each step, verify it worked, and move on. If anything fails, troubleshoot before continuing.</code></pre>
@@ -1248,8 +1257,135 @@ Run each step, verify it worked, and move on. If anything fails, troubleshoot be
                       <p class="prompt-note">Claude Code will run the commands directly in your terminal and explain each step as it goes.</p>
                     </div>
 
-                    <div class="triage-result hidden" id="result-claude-web">
-                      <p class="prompt-intro">Copy this prompt and paste it into Claude &mdash; at <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> (free) or the Claude Mac app. Claude will walk you through the entire setup.</p>
+                    <div class="triage-result hidden" id="result-claude-desktop">
+                      <p class="prompt-intro">The Claude Mac app can either <strong>run commands for you</strong> (hands-free) or <strong>walk you through it</strong> step by step. Which do you prefer?</p>
+                      <div class="triage-options">
+                        <button class="triage-pill" data-desktop-mode="hands-free">Run commands for me</button>
+                        <button class="triage-pill" data-desktop-mode="guided">Walk me through it</button>
+                      </div>
+
+                      <!-- Desktop: hands-free (Desktop Commander) -->
+                      <div class="triage-result hidden" id="result-desktop-handsfree">
+                        <div class="callout" style="margin-bottom: 16px;">
+                          <p><strong>One-time setup:</strong> To let Claude run commands, you need to install <a href="https://desktopcommander.app/" target="_blank" rel="noopener">Desktop Commander</a> &mdash; a free, open-source extension (5,500+ GitHub stars) that gives Claude access to your terminal. You only need to do this once.</p>
+                        </div>
+                        <p style="font-size: 0.95rem; margin-bottom: 12px;"><strong>Step 1:</strong> Open the <strong>Terminal</strong> app (<code>Cmd + Space</code>, type &ldquo;Terminal&rdquo;).</p>
+                        <p style="font-size: 0.95rem; margin-bottom: 6px;"><strong>Step 2:</strong> Paste this and press Enter:</p>
+                        <div class="code-block">
+                          <pre><code>curl -fsSL https://raw.githubusercontent.com/wonderwhy-er/DesktopCommanderMCP/refs/heads/main/install.sh | bash</code></pre>
+                          <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                        </div>
+                        <p style="font-size: 0.95rem; margin-bottom: 16px;"><strong>Step 3:</strong> Quit and reopen the Claude app.</p>
+                        <p class="prompt-intro">Now copy this prompt into the Claude Mac app. Claude will run each command for you:</p>
+                        <div class="code-block">
+                          <pre><code>I want to set up the BetterBattery method on my MacBook to limit charging and extend my battery life. You have access to my terminal through Desktop Commander &mdash; run each command yourself and explain what you're doing.
+
+Here's the full setup guide (from betterbattery.org):
+
+STEP 1 &mdash; INSTALL HOMEBREW (package manager for Mac)
+- First check if it's already installed: brew --version
+- If not found, install it: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+- After install, run the PATH command Homebrew shows you, then close and reopen Terminal
+- If already installed, skip to step 2
+
+STEP 2 &mdash; INSTALL BATT (the battery tool)
+- brew install batt
+- sudo brew services start batt (needs my Mac login password &mdash; nothing shows when typing, that's normal)
+
+STEP 3 &mdash; SET CHARGE LIMIT
+- Ask me: 70% (best for longevity, Mac rarely leaves desk) or 80% (good balance, unplug sometimes)
+- Run: batt limit &lt;my choice&gt;
+- Verify: batt status &mdash; should show "Upper limit: XX%"
+
+STEP 4 &mdash; DISABLE APPLE'S OPTIMIZED BATTERY CHARGING
+- System Settings &rarr; Battery &rarr; Battery Health &rarr; (i) &rarr; toggle OFF "Optimized Battery Charging"
+- This conflicts with batt and can override the limit if left on
+
+STEP 5 &mdash; CREATE TOGGLE SCRIPT
+- Create ~/bin/toggle-battery-limit.sh that checks the current batt limit and toggles between my desk limit and 100% (mobile mode), with macOS notifications via osascript
+
+STEP 6 &mdash; CREATE AUTO-DRAIN MONITOR
+- Create ~/bin/batt-monitor.sh &mdash; checks every 60 seconds if battery is above my limit, disables the power adapter to drain, re-enables when at/below lower limit. Skips if in mobile mode (limit is 100%).
+- Create a launchd agent at ~/Library/LaunchAgents/com.betterbattery.monitor.plist with StartInterval 60 and RunAtLoad true, pointing to the monitor script
+
+STEP 7 &mdash; CREATE MACOS SHORTCUT
+- Open Shortcuts app &rarr; Menu Bar section &rarr; new shortcut &rarr; "Run Shell Script" action &rarr; set shell to zsh &rarr; enter path to toggle script &rarr; rename to "Toggle Battery Limit"
+
+STEP 8 &mdash; SET UP KEYBOARD SHORTCUT (&#x21E7;&#x2318;B)
+- Create an Automator Quick Action (.workflow) in ~/Library/Services/ that runs the toggle script
+- Register &#x21E7;&#x2318;B as the keyboard shortcut via `defaults write pbs NSServicesStatus`
+- Check which of Chrome, Arc, and VS Code are installed &mdash; if any use &#x21E7;&#x2318;B, remap their shortcut to &#x2303;&#x21E7;&#x2318;B (Control+Shift+Command+B) and tell me what you changed
+- Refresh the services cache with /System/Library/CoreServices/pbs -update
+- Tell me if I need to log out and back in for the shortcut to activate
+
+STEP 9 &mdash; VERIFY &amp; EXPLAIN
+- Run batt status (check limit is set)
+- Run launchctl list | grep betterbattery (confirm monitor is running)
+- Test the keyboard shortcut &#x21E7;&#x2318;B and confirm it toggles
+- Tell me what to expect day-to-day: MagSafe LED colors, battery percentage cycling, what happens during shutdowns
+
+Run each step, verify it worked, and move on. If anything fails, troubleshoot before continuing.</code></pre>
+                          <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                        </div>
+                        <p class="prompt-note">Claude will run the commands and explain each step as it goes. You may see approval prompts for certain actions &mdash; just click Allow.</p>
+                      </div>
+
+                      <!-- Desktop: guided walkthrough -->
+                      <div class="triage-result hidden" id="result-desktop-guided">
+                        <p class="prompt-intro">Copy this prompt and paste it into the <strong>Claude Mac app</strong>. Claude will walk you through the entire setup.</p>
+                        <div class="code-block">
+                          <pre><code>I want to set up the BetterBattery method on my MacBook to limit charging and extend my battery life. Walk me through everything step by step. I'm not technical &mdash; tell me exactly what to do, and wait for me to confirm each step before moving on.
+
+Here's the full setup guide (from betterbattery.org):
+
+STEP 1 &mdash; INSTALL HOMEBREW (package manager for Mac)
+- First check if it's already installed: brew --version
+- If not found, install it: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+- After install, run the PATH command Homebrew shows you, then close and reopen Terminal
+- If already installed, skip to step 2
+
+STEP 2 &mdash; INSTALL BATT (the battery tool)
+- brew install batt
+- sudo brew services start batt (needs my Mac login password &mdash; nothing shows when typing, that's normal)
+
+STEP 3 &mdash; SET CHARGE LIMIT
+- Ask me: 70% (best for longevity, Mac rarely leaves desk) or 80% (good balance, unplug sometimes)
+- Run: batt limit &lt;my choice&gt;
+- Verify: batt status &mdash; should show "Upper limit: XX%"
+
+STEP 4 &mdash; DISABLE APPLE'S OPTIMIZED BATTERY CHARGING
+- System Settings &rarr; Battery &rarr; Battery Health &rarr; (i) &rarr; toggle OFF "Optimized Battery Charging"
+- This conflicts with batt and can override the limit if left on
+
+STEP 5 &mdash; CREATE TOGGLE SCRIPT
+- Create ~/bin/toggle-battery-limit.sh that checks the current batt limit and toggles between my desk limit and 100% (mobile mode), with macOS notifications via osascript
+
+STEP 6 &mdash; CREATE AUTO-DRAIN MONITOR
+- Create ~/bin/batt-monitor.sh &mdash; checks every 60 seconds if battery is above my limit, disables the power adapter to drain, re-enables when at/below lower limit. Skips if in mobile mode (limit is 100%).
+- Create a launchd agent at ~/Library/LaunchAgents/com.betterbattery.monitor.plist with StartInterval 60 and RunAtLoad true, pointing to the monitor script
+
+STEP 7 &mdash; CREATE MACOS SHORTCUT
+- Open Shortcuts app &rarr; Menu Bar section &rarr; new shortcut &rarr; "Run Shell Script" action &rarr; set shell to zsh &rarr; enter path to toggle script &rarr; rename to "Toggle Battery Limit"
+
+STEP 8 &mdash; SET UP KEYBOARD SHORTCUT (&#x21E7;&#x2318;B)
+- Walk me through creating an Automator Quick Action that runs the toggle script, then assigning Shift+Command+B as the keyboard shortcut in System Settings &rarr; Keyboard &rarr; Keyboard Shortcuts &rarr; Services
+- Also tell me if any apps I use (Chrome, Arc, VS Code) already use that shortcut and what to do about it
+
+STEP 9 &mdash; VERIFY &amp; EXPLAIN
+- Run batt status (check limit is set)
+- Run launchctl list | grep betterbattery (confirm monitor is running)
+- Test the keyboard shortcut &#x21E7;&#x2318;B and confirm it toggles
+- Tell me what to expect day-to-day: MagSafe LED colors, battery percentage cycling, what happens during shutdowns
+
+If anything goes wrong at any step, help me troubleshoot before moving on.</code></pre>
+                          <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                        </div>
+                        <p class="prompt-note">Claude will tell you when to open Terminal and exactly what to type. Just follow along step by step.</p>
+                      </div>
+                    </div>
+
+                    <div class="triage-result hidden" id="result-claude-browser">
+                      <p class="prompt-intro">Copy this prompt and paste it into Claude at <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> (free). Claude will walk you through the entire setup.</p>
 
                       <div class="code-block">
                         <pre><code>I want to set up the BetterBattery method on my MacBook to limit charging and extend my battery life. Walk me through everything step by step. I'm not technical &mdash; tell me exactly what to do, and wait for me to confirm each step before moving on.
@@ -1285,9 +1421,14 @@ STEP 6 &mdash; CREATE AUTO-DRAIN MONITOR
 STEP 7 &mdash; CREATE MACOS SHORTCUT
 - Open Shortcuts app &rarr; Menu Bar section &rarr; new shortcut &rarr; "Run Shell Script" action &rarr; set shell to zsh &rarr; enter path to toggle script &rarr; rename to "Toggle Battery Limit"
 
-STEP 8 &mdash; VERIFY &amp; EXPLAIN
+STEP 8 &mdash; SET UP KEYBOARD SHORTCUT (&#x21E7;&#x2318;B)
+- Walk me through creating an Automator Quick Action that runs the toggle script, then assigning Shift+Command+B as the keyboard shortcut in System Settings &rarr; Keyboard &rarr; Keyboard Shortcuts &rarr; Services
+- Also tell me if any apps I use (Chrome, Arc, VS Code) already use that shortcut and what to do about it
+
+STEP 9 &mdash; VERIFY &amp; EXPLAIN
 - Run batt status (check limit is set)
 - Run launchctl list | grep betterbattery (confirm monitor is running)
+- Test the keyboard shortcut &#x21E7;&#x2318;B and confirm it toggles
 - Tell me what to expect day-to-day: MagSafe LED colors, battery percentage cycling, what happens during shutdowns
 
 If anything goes wrong at any step, help me troubleshoot before moving on.</code></pre>
@@ -1582,7 +1723,161 @@ PLIST</code></pre>
               <!-- DIY Step 8 -->
               <div class="diy-step">
                 <details>
-                  <summary>8. Add to Control Center (optional)</summary>
+                  <summary>8. Add a keyboard shortcut (optional)</summary>
+                  <div class="details-body">
+                    <p>Add a system-wide &#x21E7;&#x2318;B (Shift+Command+B) shortcut so you can toggle without touching the mouse.</p>
+                    <p>Create the Automator Quick Action:</p>
+                    <div class="code-block">
+                      <pre><code>mkdir -p ~/Library/Services/Toggle\ Battery\ Limit.workflow/Contents &amp;&amp; cat > ~/Library/Services/Toggle\ Battery\ Limit.workflow/Contents/Info.plist &lt;&lt; 'INFOPLIST'
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+    &lt;key&gt;NSServices&lt;/key&gt;
+    &lt;array&gt;
+        &lt;dict&gt;
+            &lt;key&gt;NSMenuItem&lt;/key&gt;
+            &lt;dict&gt;
+                &lt;key&gt;default&lt;/key&gt;
+                &lt;string&gt;Toggle Battery Limit&lt;/string&gt;
+            &lt;/dict&gt;
+            &lt;key&gt;NSMessage&lt;/key&gt;
+            &lt;string&gt;runWorkflowAsService&lt;/string&gt;
+            &lt;key&gt;NSRequiredContext&lt;/key&gt;
+            &lt;dict/&gt;
+        &lt;/dict&gt;
+    &lt;/array&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+INFOPLIST</code></pre>
+                      <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    </div>
+                    <div class="code-block">
+                      <pre><code>cat > ~/Library/Services/Toggle\ Battery\ Limit.workflow/Contents/document.wflow &lt;&lt; WFLOW
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+    &lt;key&gt;AMApplicationBuild&lt;/key&gt;
+    &lt;string&gt;523&lt;/string&gt;
+    &lt;key&gt;AMApplicationVersion&lt;/key&gt;
+    &lt;string&gt;2.10&lt;/string&gt;
+    &lt;key&gt;actions&lt;/key&gt;
+    &lt;array&gt;
+        &lt;dict&gt;
+            &lt;key&gt;action&lt;/key&gt;
+            &lt;dict&gt;
+                &lt;key&gt;AMAccepts&lt;/key&gt;
+                &lt;dict&gt;
+                    &lt;key&gt;Container&lt;/key&gt;
+                    &lt;string&gt;List&lt;/string&gt;
+                    &lt;key&gt;Optional&lt;/key&gt;
+                    &lt;true/&gt;
+                    &lt;key&gt;Types&lt;/key&gt;
+                    &lt;array&gt;
+                        &lt;string&gt;com.apple.cocoa.string&lt;/string&gt;
+                    &lt;/array&gt;
+                &lt;/dict&gt;
+                &lt;key&gt;AMActionVersion&lt;/key&gt;
+                &lt;string&gt;2.0.3&lt;/string&gt;
+                &lt;key&gt;AMApplication&lt;/key&gt;
+                &lt;array&gt;
+                    &lt;string&gt;Automator&lt;/string&gt;
+                &lt;/array&gt;
+                &lt;key&gt;AMBundleIdentifier&lt;/key&gt;
+                &lt;string&gt;com.apple.RunShellScript&lt;/string&gt;
+                &lt;key&gt;AMCategory&lt;/key&gt;
+                &lt;array&gt;
+                    &lt;string&gt;AMCategoryUtilities&lt;/string&gt;
+                &lt;/array&gt;
+                &lt;key&gt;AMIconName&lt;/key&gt;
+                &lt;string&gt;Automator&lt;/string&gt;
+                &lt;key&gt;AMName&lt;/key&gt;
+                &lt;string&gt;Run Shell Script&lt;/string&gt;
+                &lt;key&gt;AMProvides&lt;/key&gt;
+                &lt;dict&gt;
+                    &lt;key&gt;Container&lt;/key&gt;
+                    &lt;string&gt;List&lt;/string&gt;
+                    &lt;key&gt;Types&lt;/key&gt;
+                    &lt;array&gt;
+                        &lt;string&gt;com.apple.cocoa.string&lt;/string&gt;
+                    &lt;/array&gt;
+                &lt;/dict&gt;
+                &lt;key&gt;ActionBundlePath&lt;/key&gt;
+                &lt;string&gt;/System/Library/Automator/Run Shell Script.action&lt;/string&gt;
+                &lt;key&gt;ActionName&lt;/key&gt;
+                &lt;string&gt;Run Shell Script&lt;/string&gt;
+                &lt;key&gt;ActionParameters&lt;/key&gt;
+                &lt;dict&gt;
+                    &lt;key&gt;COMMAND_STRING&lt;/key&gt;
+                    &lt;string&gt;/Users/\$(whoami)/bin/toggle-battery-limit.sh&lt;/string&gt;
+                    &lt;key&gt;CheckedForUserDefaultShell&lt;/key&gt;
+                    &lt;true/&gt;
+                    &lt;key&gt;inputMethod&lt;/key&gt;
+                    &lt;integer&gt;0&lt;/integer&gt;
+                    &lt;key&gt;shell&lt;/key&gt;
+                    &lt;string&gt;/bin/zsh&lt;/string&gt;
+                    &lt;key&gt;source&lt;/key&gt;
+                    &lt;string&gt;&lt;/string&gt;
+                &lt;/dict&gt;
+                &lt;key&gt;BundleIdentifier&lt;/key&gt;
+                &lt;string&gt;com.apple.RunShellScript&lt;/string&gt;
+                &lt;key&gt;CFBundleVersion&lt;/key&gt;
+                &lt;string&gt;2.0.3&lt;/string&gt;
+            &lt;/dict&gt;
+        &lt;/dict&gt;
+    &lt;/array&gt;
+    &lt;key&gt;connectors&lt;/key&gt;
+    &lt;dict/&gt;
+    &lt;key&gt;workflowMetaData&lt;/key&gt;
+    &lt;dict&gt;
+        &lt;key&gt;workflowTypeIdentifier&lt;/key&gt;
+        &lt;string&gt;com.apple.Automator.servicesMenu&lt;/string&gt;
+    &lt;/dict&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+WFLOW</code></pre>
+                      <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    </div>
+                    <p>Refresh the services cache and register the shortcut:</p>
+                    <div class="code-block">
+                      <pre><code>/System/Library/CoreServices/pbs -update</code></pre>
+                      <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    </div>
+                    <div class="code-block">
+                      <pre><code>defaults write pbs NSServicesStatus -dict-add '"(null) - Toggle Battery Limit - runWorkflowAsService"' '{ "key_equivalent" = "@$b"; }'</code></pre>
+                      <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    </div>
+                    <div class="callout">
+                      <p><strong>App conflicts:</strong> Chrome and Arc use &#x21E7;&#x2318;B for "Always Show Bookmarks Bar," and VS Code uses it for "Run Build Task." If you use these apps and want to remap their shortcut to &#x2303;&#x21E7;&#x2318;B (Control+Shift+Command+B):</p>
+                    </div>
+                    <div class="code-block">
+                      <pre><code># Chrome (skip if you don't use Chrome)
+defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Always Show Bookmarks Bar" "^@\$b"
+
+# Arc (skip if you don't use Arc)
+defaults write company.thebrowser.Browser NSUserKeyEquivalents -dict-add "Always Show Bookmarks Bar" "^@\$b"</code></pre>
+                      <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    </div>
+                    <p>For VS Code, open <code>~/Library/Application Support/Code/User/keybindings.json</code> and add:</p>
+                    <div class="code-block">
+                      <pre><code>[
+    { "key": "ctrl+shift+cmd+b", "command": "workbench.action.tasks.build" },
+    { "key": "shift+cmd+b", "command": "-workbench.action.tasks.build" }
+]</code></pre>
+                      <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
+                    </div>
+                    <div class="callout">
+                      <p><strong>Note:</strong> You may need to <strong>log out and back in</strong> for macOS to activate the keyboard shortcut.</p>
+                    </div>
+                  </div>
+                </details>
+              </div>
+
+              <!-- DIY Step 9 -->
+              <div class="diy-step">
+                <details>
+                  <summary>9. Add to Control Center (optional)</summary>
                   <div class="details-body">
                     <ol style="margin: 12px 0 12px 24px; line-height: 2.2; font-size: 0.92rem;">
                       <li>Open <strong>Control Center</strong> (click the icon in your menu bar)</li>
@@ -1725,17 +2020,18 @@ PLIST</code></pre>
         <details>
           <summary>How do I uninstall everything?</summary>
           <div class="details-body">
-            <p>Six commands in Terminal removes everything:</p>
+            <p>These commands remove everything:</p>
             <div class="code-block">
               <pre><code>sudo brew services stop batt
 brew uninstall batt
 rm ~/bin/toggle-battery-limit.sh
 rm ~/bin/batt-monitor.sh
 launchctl unload ~/Library/LaunchAgents/com.betterbattery.monitor.plist
-rm ~/Library/LaunchAgents/com.betterbattery.monitor.plist</code></pre>
+rm ~/Library/LaunchAgents/com.betterbattery.monitor.plist
+rm -rf ~/Library/Services/Toggle\ Battery\ Limit.workflow</code></pre>
               <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
             </div>
-            <p>Then go to System Settings &rarr; Battery &rarr; Battery Health and turn <strong>Optimized Battery Charging</strong> back on. Delete the Shortcut you created in the Shortcuts app.</p>
+            <p>Then go to System Settings &rarr; Battery &rarr; Battery Health and turn <strong>Optimized Battery Charging</strong> back on. Delete the Shortcut you created in the Shortcuts app. If you remapped keyboard shortcuts for Chrome, Arc, or VS Code, revert those changes.</p>
           </div>
         </details>
 
@@ -1940,13 +2236,36 @@ rm ~/Library/LaunchAgents/com.betterbattery.monitor.plist</code></pre>
         substep2.querySelectorAll('.triage-pill').forEach(function(p) { p.classList.remove('selected'); });
         pill.classList.add('selected');
         substep2.querySelectorAll('.triage-result').forEach(function(r) { r.classList.add('hidden'); });
+        // Reset desktop sub-choice
+        document.querySelectorAll('[data-desktop-mode]').forEach(function(p) { p.classList.remove('selected'); });
+        document.getElementById('result-desktop-handsfree').classList.add('hidden');
+        document.getElementById('result-desktop-guided').classList.add('hidden');
 
         if (value === 'claude-code') {
           showResult('result-claude-code');
-        } else if (value === 'claude-web') {
-          showResult('result-claude-web');
+        } else if (value === 'claude-desktop') {
+          showResult('result-claude-desktop');
+        } else if (value === 'claude-browser') {
+          showResult('result-claude-browser');
         } else if (value === 'whats-claude') {
           showResult('result-whats-claude');
+        }
+      });
+    });
+
+    // Desktop app mode pills (hands-free vs guided)
+    document.querySelectorAll('[data-desktop-mode]').forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        var mode = pill.getAttribute('data-desktop-mode');
+        var parent = document.getElementById('result-claude-desktop');
+        parent.querySelectorAll('[data-desktop-mode]').forEach(function(p) { p.classList.remove('selected'); });
+        pill.classList.add('selected');
+        document.getElementById('result-desktop-handsfree').classList.add('hidden');
+        document.getElementById('result-desktop-guided').classList.add('hidden');
+        if (mode === 'hands-free') {
+          showResult('result-desktop-handsfree');
+        } else if (mode === 'guided') {
+          showResult('result-desktop-guided');
         }
       });
     });
