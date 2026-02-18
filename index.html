@@ -1258,6 +1258,26 @@
       .app-teaser-form { width: 100%; }
       .app-teaser-form input[type="email"] { flex: 1; width: auto; min-width: 0; }
     }
+
+    /* ── Top Notification ── */
+    .top-notice {
+      max-width: var(--max-width);
+      margin: 64px auto 0;
+      padding: 0 24px;
+    }
+
+    .top-notice-box {
+      border: 1px solid #e8b4b4;
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      font-size: 0.9rem;
+      color: #c73e3e;
+      line-height: 1.6;
+    }
+
+    .top-notice-box a {
+      color: #c73e3e;
+    }
   </style>
 </head>
 <body>
@@ -1276,11 +1296,17 @@
     </div>
     <div class="header-spacer" id="header-spacer"></div>
 
+    <div class="top-notice">
+      <div class="top-notice-box">
+        <span style="color: var(--text);">If you're on macOS 26.3 or earlier, this guide still works perfectly. We'll update the setup instructions when 26.4 ships publicly.</span><br><br><strong>UPDATE</strong><br>Apple's macOS Tahoe 26.4 (developer beta) adds a native charge limit slider in System Settings. The slider lets you set a charge limit between 80% and 100% &mdash; no Terminal or third-party tools needed.<br><br><strong>Tradeoffs:</strong><br>&bull; <strong>No limit below 80%.</strong> This guide lets you set 70% (or any number). Apple's slider bottoms out at 80%.<br>&bull; <strong>batt stops working on 26.4.</strong> Apple removed the SMC keys that <a href="https://github.com/charlie0129/batt" target="_blank" rel="noopener">batt</a> relies on. If you update, you lose access to batt entirely.<br>&bull; <strong>No toggle script or keyboard shortcut.</strong> Switching between desk and mobile mode means manually opening System Settings each time.<br>&bull; <strong>No auto-drain monitor.</strong> If your Mac charges to 100% during a shutdown, it stays there until you notice.
+      </div>
+    </div>
+
 
     <!-- ═══════════════════════════════════════════════════ -->
     <!-- SECTION 2: HOW IT WORKS                            -->
     <!-- ═══════════════════════════════════════════════════ -->
-    <section>
+    <section style="padding-top: 48px;">
       <div class="container">
         <h2>How BetterBattery Works</h2>
         <p>Your MacBook gets two power modes. Switch between them with a single tap.</p>
@@ -1290,7 +1316,7 @@
             <div class="mode-icon">&#x26A1;</div>
             <div class="mode-title">Desk Mode</div>
             <p class="mode-detail">Battery holds at 70%</p>
-            <p class="mode-detail">Essentially a <span class="tooltip-wrap"><span class="tooltip-trigger">PSU</span><span class="tooltip-body"><strong>Power Supply Unit</strong> &mdash; your Mac runs directly on wall power while the battery rests at a safe charge level, just like a desktop computer.<br><a href="https://en.wikipedia.org/wiki/Power_supply_unit_(computer)" target="_blank" rel="noopener">Learn more &rarr;</a></span></span> for your MacBook</p>
+            <p class="mode-detail">Emulates a <span class="tooltip-wrap"><span class="tooltip-trigger">PSU</span><span class="tooltip-body"><strong>Power Supply Unit</strong> &mdash; your battery is still in the circuit, but held in a low-stress zone while wall power does the heavy lifting. Not a true PSU bypass &mdash; better thought of as keeping the battery in a resting state.<br><a href="https://en.wikipedia.org/wiki/Power_supply_unit_(computer)" target="_blank" rel="noopener">Learn more &rarr;</a></span></span> for your MacBook</p>
           </div>
           <div class="mode-card">
             <div class="mode-icon">&#x1F50B;</div>
@@ -1311,7 +1337,7 @@
     <section>
       <div class="container">
         <h2>Let's Be Real</h2>
-        <p>Most people's MacBooks live on a desk, plugged in, slowly wearing out the battery that makes it portable. The laptop replaced the desktop &mdash; but Apple didn't update the battery to act like a PSU. <strong>So BetterBattery does.</strong><span id="lbr-more-link"> <a href="#" id="lbr-toggle" style="color: var(--accent); white-space: nowrap;">... more</a></span><span id="lbr-expanded" style="display: none;"><br><br>Apple built <a href="https://support.apple.com/en-us/102589" target="_blank" rel="noopener">Optimized Battery Charging</a> and can even <a href="https://support.apple.com/en-us/102338" target="_blank" rel="noopener">detect when your MacBook is &ldquo;rarely used on battery&rdquo;</a> &mdash; but it doesn't go far enough. It only holds at 80%, you can't customize the limit, and there's no way to toggle between desk and mobile modes. Meanwhile, Microsoft, Lenovo, Dell, and HP all independently shipped their own charge limiters &mdash; because <a href="https://growthmarketreports.com/report/laptop-docking-station-market" target="_blank" rel="noopener">over two-thirds of workplaces deploy docking stations</a> as standard hardware. Everyone knows laptops live on desks. BetterBattery just does something about it. <a href="#setup" style="color: var(--accent); font-weight: 600;">Set it up in 10 minutes &rarr;</a></span></p>
+        <p>Most people's MacBooks live on a desk, plugged in, slowly wearing out the battery that makes it portable. The laptop replaced the desktop &mdash; but Apple didn't give you the tools to emulate a PSU. <strong>So BetterBattery does.</strong><span id="lbr-more-link"> <a href="#" id="lbr-toggle" style="color: var(--accent); white-space: nowrap;">... more</a></span><span id="lbr-expanded" style="display: none;"><br><br>Apple built <a href="https://support.apple.com/en-us/102589" target="_blank" rel="noopener">Optimized Battery Charging</a> and can even <a href="https://support.apple.com/en-us/102338" target="_blank" rel="noopener">detect when your MacBook is &ldquo;rarely used on battery&rdquo;</a> &mdash; but it doesn't go far enough. It only holds at 80%, you can't customize the limit, and there's no way to toggle between desk and mobile modes. Meanwhile, Microsoft, Lenovo, Dell, and HP all independently shipped their own charge limiters &mdash; because <a href="https://growthmarketreports.com/report/laptop-docking-station-market" target="_blank" rel="noopener">over two-thirds of workplaces deploy docking stations</a> as standard hardware. Everyone knows laptops live on desks. BetterBattery just does something about it. <a href="#setup" style="color: var(--accent); font-weight: 600;">Set it up in 10 minutes &rarr;</a></span></p>
       </div>
     </section>
 
@@ -2643,6 +2669,8 @@ rm -rf ~/Library/Services/Toggle\ Battery\ Limit.workflow</code></pre>
       document.getElementById('lbr-more-link').style.display = 'none';
       document.getElementById('lbr-expanded').style.display = 'inline';
     });
+
+
 
     // ── Methodology link opens accordion ──
     document.getElementById('calc-methodology-link').addEventListener('click', function(e) {
