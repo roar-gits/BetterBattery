@@ -1275,6 +1275,41 @@
       line-height: 1.6;
     }
 
+    .top-notice-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .top-notice-header strong {
+      font-size: 0.9rem;
+    }
+
+    .top-notice-toggle {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #c73e3e;
+      background: none;
+      border: 1px solid #e8b4b4;
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 4px 12px;
+      white-space: nowrap;
+      width: 86px;
+      text-align: center;
+      transition: background 0.15s;
+    }
+
+    .top-notice-toggle:hover {
+      background: #fef2f2;
+    }
+
+    .top-notice-body {
+      display: none;
+      margin-top: 14px;
+    }
+
     .top-notice-box a {
       color: #c73e3e;
     }
@@ -1298,7 +1333,13 @@
 
     <div class="top-notice">
       <div class="top-notice-box">
-        <span style="color: var(--text);">If you're on macOS 26.3 or earlier, this guide still works perfectly. We'll update the setup instructions when 26.4 ships publicly.</span><br><br><strong>UPDATE</strong><br>Apple's macOS Tahoe 26.4 (developer beta) adds a native charge limit slider in System Settings. The slider lets you set a charge limit between 80% and 100% &mdash; no Terminal or third-party tools needed.<br><br><strong>Tradeoffs:</strong><br>&bull; <strong>No limit below 80%.</strong> This guide lets you set 70% (or any number). Apple's slider bottoms out at 80%.<br>&bull; <strong>batt stops working on 26.4.</strong> Apple removed the SMC keys that <a href="https://github.com/charlie0129/batt" target="_blank" rel="noopener">batt</a> relies on. If you update, you lose access to batt entirely.<br>&bull; <strong>No toggle script or keyboard shortcut.</strong> Switching between desk and mobile mode means manually opening System Settings each time.<br>&bull; <strong>No auto-drain monitor.</strong> If your Mac charges to 100% during a shutdown, it stays there until you notice.
+        <div class="top-notice-header">
+          <strong>UPDATE</strong> &nbsp;macOS Tahoe 26.4
+          <button class="top-notice-toggle" id="notice-toggle">read more</button>
+        </div>
+        <div class="top-notice-body" id="notice-body">
+          <span style="color: var(--text);">If you're on macOS 26.3 or earlier, this guide still works perfectly. We'll update the setup instructions when 26.4 ships publicly.</span><br><br>Apple's macOS Tahoe 26.4 (developer beta) adds a native charge limit slider in System Settings. The slider lets you set a charge limit between 80% and 100% &mdash; no Terminal or third-party tools needed.<br><br><strong>Tradeoffs:</strong><br>&bull; <strong>No limit below 80%.</strong> This guide lets you set 70% (or any number). Apple's slider bottoms out at 80%.<br>&bull; <strong>batt stops working on 26.4.</strong> Apple removed the SMC keys that <a href="https://github.com/charlie0129/batt" target="_blank" rel="noopener">batt</a> relies on. If you update, you lose access to batt entirely.<br>&bull; <strong>No toggle script or keyboard shortcut.</strong> Switching between desk and mobile mode means manually opening System Settings each time.<br>&bull; <strong>No auto-drain monitor.</strong> If your Mac charges to 100% during a shutdown, it stays there until you notice.
+        </div>
       </div>
     </div>
 
@@ -2656,6 +2697,18 @@ rm -rf ~/Library/Services/Toggle\ Battery\ Limit.workflow</code></pre>
     });
 
     updateCalculator();
+
+    // ── Update notice toggle ──
+    document.getElementById('notice-toggle').addEventListener('click', function() {
+      var body = document.getElementById('notice-body');
+      if (body.style.display === 'block') {
+        body.style.display = 'none';
+        this.textContent = 'read more';
+      } else {
+        body.style.display = 'block';
+        this.textContent = 'close';
+      }
+    });
 
     // ── Logo scrolls to top ──
     document.getElementById('logo-link').addEventListener('click', function(e) {
