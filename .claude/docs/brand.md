@@ -8,7 +8,7 @@ Domains, social handles, and brand identity for this project.
 
 | Domain | Status | Primary? | Registrar | Expires | Notes |
 |--------|--------|----------|-----------|---------|-------|
-| *(none yet)* | | | | | |
+| betterbattery.org | active | Yes | Namecheap | — | GitHub Pages via CNAME |
 
 **Status key**: `active` (live site), `parked` (owned, not in use), `redirect` (points to primary), `available` (not yet purchased), `taken` (owned by someone else)
 
@@ -18,16 +18,9 @@ Domains, social handles, and brand identity for this project.
 
 | Platform | Handle | Status | URL | Notes |
 |----------|--------|--------|-----|-------|
-| GitHub | | | | |
-| X/Twitter | | | | |
-| Instagram | | | | |
-| LinkedIn | | | | |
-| YouTube | | | | |
-| TikTok | | | | |
+| GitHub | roar-gits/BetterBattery | active | https://github.com/roar-gits/BetterBattery | |
 
 **Status key**: `active`, `reserved` (claimed but unused), `unavailable` (taken by others)
-
-> Remove rows for platforms not relevant to this project. Add rows for project-specific platforms.
 
 ---
 
@@ -35,13 +28,13 @@ Domains, social handles, and brand identity for this project.
 
 | Asset | Value |
 |-------|-------|
-| **Project name** | |
-| **Tagline** | |
-| **Logo** | |
-| **Colors** | |
-| **Fonts** | |
+| **Project name** | BetterBattery |
+| **Tagline** | Phase 3 pending |
+| **Logo** | Phase 3 pending |
+| **Colors** | Primary: deep slate/charcoal. Accent: amber/gold (ties to MagSafe LED, energy). Background: off-white/warm gray. One dark section for environmental case. Avoid: bright greens (greenwashing), tech purples, gradients. |
+| **Fonts** | Editorial serif for headings (authority, journalism-adjacent). Clean readable sans for body. Pleasant monospace for code blocks. All via Google Fonts. |
 
-> Fill in as brand decisions are made. Link to design files where applicable.
+**Design direction**: "Editorial environmental" — The Pudding meets Patagonia's "Don't Buy This Jacket." Clean, confident, data-driven. Not techy, not corporate, not greenwashed. See `initiatives/betterbattery-redesign-brief.md` for full direction.
 
 ---
 

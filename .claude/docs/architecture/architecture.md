@@ -1,4 +1,4 @@
-<!-- Last updated: 2026-02-16 | Status: Active -->
+<!-- Last updated: 2026-02-17 | Status: Active -->
 
 # Architecture
 
@@ -6,42 +6,56 @@
 
 | Layer | Technology |
 |-------|------------|
-| Framework | _TBD_ |
-| Hosting | _TBD_ |
-| Database | _TBD_ |
-| Auth | _TBD_ |
-<!-- CUSTOMIZE: Add/remove layers as needed -->
+| Framework | None — single `index.html` with inline `<style>` and `<script>` |
+| Hosting | GitHub Pages (deploys from `main` branch) |
+| Fonts | Google Fonts (loaded via `<link>` tags) |
+| Database | None |
+| Auth | None |
+| Build tools | None — file is deployable as-is |
 
 ---
 
 ## Directory Structure
 
 ```
-TBD
+BetterBattery/
+├── index.html          # The entire site — single-page, inline CSS/JS (~114KB)
+├── CNAME               # GitHub Pages custom domain: betterbattery.org
+├── og-image.png        # Open Graph social preview image
+├── batt-monitor.sh     # Auto-drain monitor script (reference copy)
+└── .claude/            # Claude Code project config + docs
 ```
-
-<!-- CUSTOMIZE: Annotate key directories and files -->
 
 ---
 
 ## Key Patterns
 
-<!-- CUSTOMIZE: Document the important patterns used in this project -->
+### Single-Page Static Site
 
-### Example Pattern
+Everything lives in one `index.html`. No routing, no components, no build step. Inline `<style>` and `<script>` tags. Deploys by pushing to `main`.
 
-Description of the pattern and when to use it.
+### Two Setup Paths
 
-```typescript
-// Code example if helpful
-```
+The site offers two ways to set up battery limiting:
+1. **Claude-assisted** (recommended) — user installs batt via one Terminal command, then uses Claude AI to complete the rest conversationally
+2. **DIY** — full step-by-step guide with collapsible accordion sections
+
+### Progressive Disclosure
+
+Content uses collapsible/accordion sections (CSS `<details>`/`<summary>` where possible, minimal JS). Science and environmental sections default to summary view with expand toggles.
+
+### Copy-to-Clipboard
+
+Code blocks have copy buttons with visual feedback. Implemented with minimal inline JS.
 
 ---
 
 ## Conventions
 
-<!-- CUSTOMIZE: Add project-specific conventions -->
-
 | Convention | Rule |
 |------------|------|
-| Example | Description |
+| Deployment | Push to `main` → GitHub Pages auto-deploys |
+| Code blocks | Must use full paths (e.g., `/opt/homebrew/bin/batt`) — Shortcuts/launchd don't inherit PATH |
+| Page weight | Target under 500KB including fonts |
+| Browser support | All modern browsers (Safari, Chrome, Firefox, Edge) |
+| Accessibility | Semantic HTML5, WCAG AA color contrast, keyboard-navigable |

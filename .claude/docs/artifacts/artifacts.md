@@ -21,7 +21,7 @@ This directory contains **generated deliverables** produced by Claude during wor
 
 | Artifact | Date | Type | Description |
 |----------|------|------|-------------|
-| *(none yet)* | | | |
+| [compass_artifact_...md](./compass_artifact_wf-32721c91-389d-4ec1-8883-e49ce219f85e_text_markdown.md) | 2026-02 | Research | Environmental case for MacBook battery charge limiting — full evidence base with citable sources. Covers installed base, battery chemistry, CO2 impact, mineral extraction, e-waste data. |
 
 ---
 

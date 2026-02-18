@@ -18,28 +18,13 @@ Progressive disclosure docs for this project.
 
 ---
 
-<!-- CUSTOMIZE: Uncomment if project shares resources with another project -->
-<!--
-## Shared with {{OTHER_PROJECT}} (Don't Duplicate)
-
-These docs live in the sibling project and apply to both:
-
-| Topic | Location |
-|-------|----------|
-| Database schema | `../{{other-project}}/docs/architecture/` |
-| Business strategy | `../{{other-project}}/docs/strategy/` |
-| Shared feature specs | `../{{other-project}}/docs/features/` |
-
-Rule: Don't duplicate. Reference the source.
--->
-
 ---
 
 ## Quick Links
 
-- **Live site**: _TBD_
-- **Repository**: _TBD_
-<!-- CUSTOMIZE: Add dashboard links (Vercel, Supabase, etc.) -->
+- **Live site**: [betterbattery.org](https://betterbattery.org)
+- **Repository**: [roar-gits/BetterBattery](https://github.com/roar-gits/BetterBattery)
+- **Hosting**: GitHub Pages (deploys from `main` branch)
 
 ---
 

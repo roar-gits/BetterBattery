@@ -18,7 +18,8 @@ services:
 
 | Current Focus | Status |
 |---------------|--------|
-| _Project setup_ | Pending |
+| Site redesign (environmental angle, Claude-assisted setup) | Active |
+| Impact calculator fact-checking | Complete |
 
 > **Keep this table updated**: When work focus changes, update silently. This helps future sessions pick up where you left off.
 
@@ -28,7 +29,7 @@ services:
 |---------|-------|
 | **Type** | `static` |
 | **Stack** | GitHub + GitHub Pages |
-| **Status** | `pending-setup` |
+| **Status** | `active` |
 
 > **Stack types**:
 > - `static`: GitHub Pages (just needs GitHub credentials)
