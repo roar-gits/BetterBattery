@@ -1334,11 +1334,7 @@
     <div class="top-notice">
       <div class="top-notice-box">
         <div class="top-notice-header">
-          <strong>UPDATE</strong> &nbsp;macOS Tahoe 26.4
-          <button class="top-notice-toggle" id="notice-toggle">read more</button>
-        </div>
-        <div class="top-notice-body" id="notice-body">
-          <span style="color: var(--text);">If you're on macOS 26.3 or earlier, this guide still works perfectly. We'll update the setup instructions when 26.4 ships publicly.</span><br><br>Apple's macOS Tahoe 26.4 (developer beta) adds a native charge limit slider in System Settings. The slider lets you set a charge limit between 80% and 100% &mdash; no Terminal or third-party tools needed.<br><br><strong>Tradeoffs:</strong><br>&bull; <strong>No limit below 80%.</strong> This guide lets you set 70% (or any number). Apple's slider bottoms out at 80%.<br>&bull; <strong>batt stops working on 26.4.</strong> Apple removed the SMC keys that <a href="https://github.com/charlie0129/batt" target="_blank" rel="noopener">batt</a> relies on. If you update, you lose access to batt entirely.<br>&bull; <strong>No toggle script or keyboard shortcut.</strong> Switching between desk and mobile mode means manually opening System Settings each time.<br>&bull; <strong>No auto-drain monitor.</strong> If your Mac charges to 100% during a shutdown, it stays there until you notice.
+          <strong>&#x2705; macOS Tahoe 26.4</strong> &nbsp;batt works on 26.4. Apple added a native charge limit slider (80&ndash;100%), but BetterBattery still gives you sub-80% limits, a toggle script, and auto-drain &mdash; <a href="#faq-apple-limit" style="color: var(--accent);">see why it matters</a>.
         </div>
       </div>
     </div>
@@ -1378,7 +1374,7 @@
     <section>
       <div class="container">
         <h2>Let's Be Real</h2>
-        <p>Most people's MacBooks live on a desk, plugged in, slowly wearing out the battery that makes it portable. The laptop replaced the desktop &mdash; but Apple didn't give you the tools to emulate a PSU. <strong>So BetterBattery does.</strong><span id="lbr-more-link"> <a href="#" id="lbr-toggle" style="color: var(--accent); white-space: nowrap;">... more</a></span><span id="lbr-expanded" style="display: none;"><br><br>Apple built <a href="https://support.apple.com/en-us/102589" target="_blank" rel="noopener">Optimized Battery Charging</a> and can even <a href="https://support.apple.com/en-us/102338" target="_blank" rel="noopener">detect when your MacBook is &ldquo;rarely used on battery&rdquo;</a> &mdash; but it doesn't go far enough. It only holds at 80%, you can't customize the limit, and there's no way to toggle between desk and mobile modes. Meanwhile, Microsoft, Lenovo, Dell, and HP all independently shipped their own charge limiters &mdash; because <a href="https://growthmarketreports.com/report/laptop-docking-station-market" target="_blank" rel="noopener">over two-thirds of workplaces deploy docking stations</a> as standard hardware. Everyone knows laptops live on desks. BetterBattery just does something about it. <a href="#setup" style="color: var(--accent); font-weight: 600;">Set it up in 10 minutes &rarr;</a></span></p>
+        <p>Most people's MacBooks live on a desk, plugged in, slowly wearing out the battery that makes it portable. The laptop replaced the desktop &mdash; but Apple didn't give you the tools to emulate a PSU. <strong>So BetterBattery does.</strong><span id="lbr-more-link"> <a href="#" id="lbr-toggle" style="color: var(--accent); white-space: nowrap;">... more</a></span><span id="lbr-expanded" style="display: none;"><br><br>Apple built <a href="https://support.apple.com/en-us/102589" target="_blank" rel="noopener">Optimized Battery Charging</a> and can even <a href="https://support.apple.com/en-us/102338" target="_blank" rel="noopener">detect when your MacBook is &ldquo;rarely used on battery&rdquo;</a> &mdash; but it doesn't go far enough. Even macOS 26.4's improved slider only goes down to 80% (in 5% steps), offers no desk/mobile toggle, and has no auto-drain monitor. Meanwhile, Microsoft, Lenovo, Dell, and HP all independently shipped their own charge limiters &mdash; because <a href="https://growthmarketreports.com/report/laptop-docking-station-market" target="_blank" rel="noopener">over two-thirds of workplaces deploy docking stations</a> as standard hardware. Everyone knows laptops live on desks. BetterBattery just does something about it. <a href="#setup" style="color: var(--accent); font-weight: 600;">Set it up in 10 minutes &rarr;</a></span></p>
       </div>
     </section>
 
@@ -1924,12 +1920,16 @@ If anything goes wrong at any step, help me troubleshoot before moving on.</code
                 <details>
                   <summary>4. Disable Apple's battery management</summary>
                   <div class="details-body">
-                    <p>Apple's built-in battery feature conflicts with batt. Turn it off:</p>
+                    <p>Apple's built-in battery features conflict with batt. Turn them off:</p>
                     <div class="nav-path">
                       System Settings <span>&rarr;</span> Battery <span>&rarr;</span> Battery Health <span>&rarr;</span> <strong>(i)</strong> <span>&rarr;</span> toggle <strong>OFF</strong> "Optimized Battery Charging"
                     </div>
+                    <p style="margin-top: 12px;"><strong>On macOS 26.4+</strong>, also disable the new Charge Limit slider:</p>
+                    <div class="nav-path">
+                      System Settings <span>&rarr;</span> Battery <span>&rarr;</span> Charging <span>&rarr;</span> <strong>(i)</strong> <span>&rarr;</span> set Charge Limit to <strong>100% (None)</strong>
+                    </div>
                     <div class="callout warning">
-                      <p><strong>Don't skip this.</strong> If left on, Apple's feature may override your limit and charge to 100% unpredictably.</p>
+                      <p><strong>Don't skip this.</strong> If left on, Apple's features may override your limit and charge to 100% unpredictably.</p>
                     </div>
                   </div>
                 </details>
@@ -2347,10 +2347,11 @@ defaults write company.thebrowser.Browser NSUserKeyEquivalents -dict-add "Always
           </div>
         </details>
 
-        <details>
+        <details id="faq-apple-limit">
           <summary>What about Apple's built-in charge limit?</summary>
           <div class="details-body">
-            <p>Recent versions of macOS (Sonoma 14.4 and later) include a built-in 80% charge limit option. It works, but batt gives you more control: any percentage you want, a toggle script for desk/mobile mode, and the auto-drain monitor that actively manages your battery. If you prefer Apple's native option, it's a fine choice too &mdash; 80% is far better than 100%.</p>
+            <p>macOS Tahoe 26.4 added a charge limit slider in System Settings that lets you choose 80%, 85%, 90%, 95%, or 100%. Earlier versions (Sonoma 14.4+) offered only a fixed 80% option. Apple's native slider is a solid choice if one of those presets works for you &mdash; any limit is far better than 100%.</p>
+            <p>BetterBattery goes further: set <em>any</em> percentage (including sub-80% like 70%), switch between desk and mobile mode with a single keyboard shortcut, and let the auto-drain monitor catch post-shutdown charges automatically. If Apple's slider covers your needs, use it. If you want finer control, BetterBattery is here.</p>
           </div>
         </details>
 
@@ -2403,7 +2404,7 @@ rm ~/Library/LaunchAgents/com.betterbattery.monitor.plist
 rm -rf ~/Library/Services/Toggle\ Battery\ Limit.workflow</code></pre>
               <button class="copy-btn" aria-label="Copy to clipboard">Copy</button>
             </div>
-            <p>Then go to System Settings &rarr; Battery &rarr; Battery Health and turn <strong>Optimized Battery Charging</strong> back on. Delete the Shortcut you created in the Shortcuts app. If you remapped keyboard shortcuts for Chrome, Arc, or VS Code, revert those changes.</p>
+            <p>Then go to System Settings &rarr; Battery &rarr; Battery Health and turn <strong>Optimized Battery Charging</strong> back on. On macOS 26.4+, also re-enable the <strong>Charge Limit</strong> slider (System Settings &rarr; Battery &rarr; Charging) if desired. Delete the Shortcut you created in the Shortcuts app. If you remapped keyboard shortcuts for Chrome, Arc, or VS Code, revert those changes.</p>
           </div>
         </details>
 
@@ -2697,18 +2698,6 @@ rm -rf ~/Library/Services/Toggle\ Battery\ Limit.workflow</code></pre>
     });
 
     updateCalculator();
-
-    // ── Update notice toggle ──
-    document.getElementById('notice-toggle').addEventListener('click', function() {
-      var body = document.getElementById('notice-body');
-      if (body.style.display === 'block') {
-        body.style.display = 'none';
-        this.textContent = 'read more';
-      } else {
-        body.style.display = 'block';
-        this.textContent = 'close';
-      }
-    });
 
     // ── Logo scrolls to top ──
     document.getElementById('logo-link').addEventListener('click', function(e) {
