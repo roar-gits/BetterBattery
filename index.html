@@ -198,6 +198,25 @@
       text-decoration: none;
     }
 
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .header-nav-link {
+      font-family: 'Source Sans 3', -apple-system, sans-serif;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .header-nav-link:hover {
+      color: var(--text);
+      text-decoration: none;
+    }
+
     /* ── Closing Impact ── */
     .closing {
       text-align: center;
@@ -1242,6 +1261,7 @@
       section + section { margin-top: -96px; }
       .site-header { flex-wrap: wrap; gap: 8px; padding: 14px 24px !important; }
       .header-badge { position: static; transform: none; width: 100%; text-align: center; order: -1; }
+      .header-nav-link { display: none; }
       h2 { font-size: 1.4rem; }
       .site-title { font-size: 1.4rem; }
       .mode-card { padding: 20px 14px; }
@@ -1259,60 +1279,6 @@
       .app-teaser-form input[type="email"] { flex: 1; width: auto; min-width: 0; }
     }
 
-    /* ── Top Notification ── */
-    .top-notice {
-      max-width: var(--max-width);
-      margin: 64px auto 0;
-      padding: 0 24px;
-    }
-
-    .top-notice-box {
-      border: 1px solid #e8b4b4;
-      border-radius: var(--radius);
-      padding: 14px 18px;
-      font-size: 0.9rem;
-      color: #c73e3e;
-      line-height: 1.6;
-    }
-
-    .top-notice-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .top-notice-header strong {
-      font-size: 0.9rem;
-    }
-
-    .top-notice-toggle {
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: #c73e3e;
-      background: none;
-      border: 1px solid #e8b4b4;
-      border-radius: 4px;
-      cursor: pointer;
-      padding: 4px 12px;
-      white-space: nowrap;
-      width: 86px;
-      text-align: center;
-      transition: background 0.15s;
-    }
-
-    .top-notice-toggle:hover {
-      background: #fef2f2;
-    }
-
-    .top-notice-body {
-      display: none;
-      margin-top: 14px;
-    }
-
-    .top-notice-box a {
-      color: #c73e3e;
-    }
   </style>
 </head>
 <body>
@@ -1326,27 +1292,24 @@
       <header class="site-header">
         <a href="#" class="site-title" id="logo-link">BetterBattery</a>
         <span class="header-badge">Free &middot; 10 minutes &middot; Apple Silicon Macs</span>
-        <a href="#setup" class="header-cta">Set it up</a>
+        <nav class="header-nav">
+          <a href="#how" class="header-nav-link">How it works</a>
+          <a href="#setup" class="header-cta">Set it up</a>
+          <a href="#why" class="header-nav-link">Why it matters</a>
+          <a href="#faq" class="header-nav-link">FAQ</a>
+        </nav>
       </header>
     </div>
     <div class="header-spacer" id="header-spacer"></div>
 
-    <div class="top-notice">
-      <div class="top-notice-box">
-        <div class="top-notice-header">
-          <strong>&#x2705; macOS Tahoe 26.4</strong> &nbsp;batt works on 26.4. Apple added a native charge limit slider (80&ndash;100%), but BetterBattery still gives you sub-80% limits, a toggle script, and auto-drain &mdash; <a href="#faq-apple-limit" style="color: var(--accent);">see why it matters</a>.
-        </div>
-      </div>
-    </div>
-
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- SECTION 2: HOW IT WORKS                            -->
+    <!-- SECTION 1: HOW BETTERBATTERY WORKS                 -->
     <!-- ═══════════════════════════════════════════════════ -->
-    <section style="padding-top: 48px;">
+    <section id="how" style="padding-top: 48px;">
       <div class="container">
         <h2>How BetterBattery Works</h2>
-        <p>Your MacBook gets two power modes. Switch between them with a single tap.</p>
+        <p>Most MacBooks live on a desk, plugged in, slowly wearing out the battery that makes them portable. BetterBattery gives your Mac two power modes &mdash; switch between them with a single tap.</p>
 
         <div class="modes-grid">
           <div class="mode-card">
@@ -1363,116 +1326,57 @@
           </div>
         </div>
 
-        <p class="reassurance">Your Mac works exactly the same in both modes. The BetterBattery method just changes how power is managed &mdash; your Mac may even run cooler on Desk Mode. <a href="#environment" style="color: #2d6a4f; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px;">Your ecosystem will thank you too &#x1F331;</a></p>
-      </div>
-    </section>
+        <p class="reassurance">Your Mac works exactly the same in both modes. The BetterBattery method just changes how power is managed &mdash; your Mac may even run cooler on Desk Mode. <a href="#why" style="color: #2d6a4f; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px;">Your ecosystem will thank you too &#x1F331;</a></p>
 
-
-    <!-- ═══════════════════════════════════════════════════ -->
-    <!-- SECTION: LET'S BE REAL                             -->
-    <!-- ═══════════════════════════════════════════════════ -->
-    <section>
-      <div class="container">
-        <h2>Let's Be Real</h2>
-        <p>Most people's MacBooks live on a desk, plugged in, slowly wearing out the battery that makes it portable. The laptop replaced the desktop &mdash; but Apple didn't give you the tools to emulate a PSU. <strong>So BetterBattery does.</strong><span id="lbr-more-link"> <a href="#" id="lbr-toggle" style="color: var(--accent); white-space: nowrap;">... more</a></span><span id="lbr-expanded" style="display: none;"><br><br>Apple built <a href="https://support.apple.com/en-us/102589" target="_blank" rel="noopener">Optimized Battery Charging</a> and can even <a href="https://support.apple.com/en-us/102338" target="_blank" rel="noopener">detect when your MacBook is &ldquo;rarely used on battery&rdquo;</a> &mdash; but it doesn't go far enough. Even macOS 26.4's improved slider only goes down to 80% (in 5% steps), offers no desk/mobile toggle, and has no auto-drain monitor. Meanwhile, Microsoft, Lenovo, Dell, and HP all independently shipped their own charge limiters &mdash; because <a href="https://growthmarketreports.com/report/laptop-docking-station-market" target="_blank" rel="noopener">over two-thirds of workplaces deploy docking stations</a> as standard hardware. Everyone knows laptops live on desks. BetterBattery just does something about it. <a href="#setup" style="color: var(--accent); font-weight: 600;">Set it up in 10 minutes &rarr;</a></span></p>
-      </div>
-    </section>
-
-
-    <!-- ═══════════════════════════════════════════════════ -->
-    <!-- SECTION 3: THE SCIENCE                             -->
-    <!-- ═══════════════════════════════════════════════════ -->
-    <section>
-      <div class="container">
-        <h2>The Science</h2>
-
-        <ul class="science-list">
-          <li><strong>High voltage degrades batteries.</strong> Keeping a lithium-ion cell above 80% charge puts constant stress on the cathode, accelerating chemical breakdown. Lower charge = lower voltage = less stress.</li>
-          <li><strong>Every laptop maker knows this.</strong> Apple, Lenovo, Dell, and ASUS all ship some form of charge limiting. The science is settled &mdash; it's just not turned on by default.</li>
-          <li><strong>The numbers are significant.</strong> Batteries held at 70&ndash;80% retain roughly 96% of their capacity after one year. At 100%, that drops to around 80%. That's the difference between a 6-year battery and a 3-year one.</li>
+        <h3>What you'll notice day-to-day</h3>
+        <ul class="expect-list" style="margin-top: 24px;">
+          <li>
+            <span class="expect-icon">&#x26A1;</span>
+            <div class="expect-text">
+              <strong>The lightning bolt stays.</strong>
+              The battery icon in your menu bar will still show a lightning bolt (&#x26A1;) when plugged in. That means "connected to power," not "currently charging." This is normal.
+            </div>
+          </li>
+          <li>
+            <span class="expect-icon">&#x1F7E2;</span>
+            <div class="expect-text">
+              <strong>MagSafe LED colors.</strong>
+              Green means your battery is at the limit and holding. Amber means it's actively charging (either toward your limit or toward 100% in mobile mode).
+            </div>
+          </li>
+          <li>
+            <span class="expect-icon">&#x1F504;</span>
+            <div class="expect-text">
+              <strong>Small cycling is normal.</strong>
+              Your battery might drift between 68% and 70% (or 78% and 80%). This tiny range is normal and healthy &mdash; batt lets it fluctuate slightly to avoid constant micro-charging.
+            </div>
+          </li>
+          <li>
+            <span class="expect-icon">&#x1F4C9;</span>
+            <div class="expect-text">
+              <strong>Battery above limit will auto-drain.</strong>
+              If your Mac charges to 100% during a shutdown, the auto-drain monitor will notice and gently drain it back to your limit by disabling the power adapter temporarily. You might see the percentage dropping — that's the monitor doing its job.
+            </div>
+          </li>
+          <li>
+            <span class="expect-icon">&#x1F50C;</span>
+            <div class="expect-text">
+              <strong>Shutdowns charge to 100%.</strong>
+              When your Mac is fully shut down, batt isn't running, so the hardware charges normally. This is a hardware limitation &mdash; it's fine for occasional shutdowns. The monitor will drain it back when your Mac wakes up.
+            </div>
+          </li>
         </ul>
-
-        <details>
-          <summary>Research citations</summary>
-          <div class="details-body">
-            <p><strong>Battery University BU-808</strong> &mdash; "How to Prolong Lithium-based Batteries." Comprehensive overview of voltage stress, depth of discharge, and temperature effects on cell longevity. <a href="https://batteryuniversity.com/article/bu-808-how-to-prolong-lithium-based-batteries" target="_blank" rel="noopener">Read article</a></p>
-            <p><strong>Choi &amp; Lim (2002)</strong> &mdash; "Factors that affect cycle-life and possible degradation mechanisms of a Li-ion cell based on LiCoO2." Journal of Power Sources. Demonstrated that higher upper charge voltage significantly reduces cycle life.</p>
-            <p><strong>Wikner &amp; Thiringer (2018)</strong> &mdash; "Extending Battery Lifetime by Avoiding High SOC." Applied Energy. Calendar aging study showing that state-of-charge is the dominant factor in capacity fade, even more than cycling.</p>
-            <p><strong>Dahn Lab, Dalhousie University (2019&ndash;2022)</strong> &mdash; Multiple studies on long-term degradation of NMC and LFP cells. Confirmed that reducing upper charge voltage from 4.2V to 4.0V (roughly 100% to 70%) can more than double calendar life.</p>
-            <p><strong>Apple Technical Support</strong> &mdash; Apple's own documentation acknowledges that "charging your battery to full and keeping it there for extended periods can be detrimental," which is why they introduced Optimized Battery Charging.</p>
-          </div>
-        </details>
       </div>
     </section>
 
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- SECTION 4: ENVIRONMENTAL CASE                      -->
-    <!-- ═══════════════════════════════════════════════════ -->
-    <section class="environment" id="environment">
-      <div class="container">
-        <h2>The Bigger Picture</h2>
-        <p class="env-intro">Every battery that lasts twice as long is one that never needs to be mined, manufactured, shipped, and disposed of. Here's what that adds up to.</p>
-
-        <!-- Impact Calculator — lead with agency -->
-        <div class="calculator">
-          <h3>What if more people did this?</h3>
-          <p class="calc-label">Move the slider to see the impact if a percentage of MacBook users adopted charge limiting:</p>
-
-          <div class="calc-slider-row">
-            <input type="range" id="adoption-slider" min="1" max="100" value="10" aria-label="Adoption percentage">
-            <span class="calc-pct" id="adoption-value">10%</span>
-          </div>
-
-          <div class="calc-timeframe">
-            <span class="calc-timeframe-label">Over</span>
-            <button class="calc-time-pill selected" data-years="1">1 year</button>
-            <button class="calc-time-pill" data-years="5">5 years</button>
-            <button class="calc-time-pill" data-years="10">10 years</button>
-          </div>
-
-          <div class="calc-results">
-            <div class="calc-result">
-              <span class="calc-result-number" id="calc-replacements">1.1M</span>
-              <span class="calc-result-label">battery replacements avoided <span id="calc-period">per year</span></span>
-            </div>
-            <div class="calc-result">
-              <span class="calc-result-number" id="calc-co2">57,143</span>
-              <span class="calc-result-label">tonnes CO&#8322; saved</span>
-            </div>
-            <div class="calc-result">
-              <span class="calc-result-number" id="calc-lithium">8,000</span>
-              <span class="calc-result-label">kg lithium kept in the ground</span>
-            </div>
-          </div>
-          <p class="calc-footnote">Estimates based on published research from Battery University, Apple Environmental Reports, and MIT. <a href="#calc-methodology" id="calc-methodology-link">See the numbers behind this</a></p>
-        </div>
-
-        <p class="env-empowerment"><strong>You're not just saving your battery.</strong> You're part of something bigger.</p>
-
-        <details id="calc-methodology">
-          <summary>The numbers behind this</summary>
-          <div class="details-body">
-            <p><strong>6&ndash;8g of lithium</strong> in every MacBook battery &mdash; mined from fragile desert ecosystems in Chile, Argentina, and Australia. <a href="https://batteryguy.com/kb/knowledge-base/how-to-calculate-the-lithium-content-in-a-battery/" target="_blank" rel="noopener">IATA lithium content standard</a></p>
-            <p><strong>70% of global cobalt</strong> comes from the DRC, often from artisanal mines with severe human and environmental costs. <a href="https://pubs.usgs.gov/periodicals/mcs2024/mcs2024-cobalt.pdf" target="_blank" rel="noopener">USGS Mineral Commodity Summary</a></p>
-            <p><strong>~50kg of CO&#8322;</strong> emitted manufacturing and shipping each replacement battery (range: 30&ndash;60kg). <a href="https://climate.mit.edu/ask-mit/how-much-co2-emitted-manufacturing-batteries" target="_blank" rel="noopener">MIT Climate Portal</a>, <a href="https://www.apple.com/environment/" target="_blank" rel="noopener">Apple Environmental Reports</a></p>
-            <p><strong>62 million tonnes</strong> of e-waste generated globally in 2022 &mdash; the fastest-growing waste stream on the planet. Only 22% is properly recycled. <a href="https://ewastemonitor.info/" target="_blank" rel="noopener">Global E-waste Monitor 2024</a></p>
-            <p><strong>Battery chemicals leach.</strong> Lithium, cobalt, nickel, and manganese from improperly disposed batteries contaminate soil and groundwater. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10683946/" target="_blank" rel="noopener">PMC &mdash; Supply chain environmental impacts</a></p>
-            <p style="margin-top: 14px; font-size: 0.88rem;"><strong>Calculator methodology:</strong> Based on ~80M active MacBooks (<a href="https://www.spyhunter.com/shm/macos-stats/" target="_blank" rel="noopener">analyst estimates</a>; ~86% of ~100M Macs). Assumes each adopter avoids one battery replacement per 7 years (<a href="https://support.apple.com/en-us/102888" target="_blank" rel="noopener">Apple rates batteries at 1,000 cycles</a>). CO&#8322; at 50kg and lithium at 7g per replacement. Battery longevity data from <a href="https://batteryuniversity.com/article/bu-808-how-to-prolong-lithium-based-batteries" target="_blank" rel="noopener">Battery University BU-808</a>.</p>
-          </div>
-        </details>
-
-      </div>
-    </section>
-
-
-    <!-- ═══════════════════════════════════════════════════ -->
-    <!-- SECTION 5: SETUP — INTERACTIVE TRIAGE               -->
+    <!-- SECTION 2: SET IT UP                               -->
     <!-- ═══════════════════════════════════════════════════ -->
     <section class="setup" id="setup">
       <div class="container-wide">
         <h2>Set It Up</h2>
-        <p>Two ways to get started. Both take about 10 minutes and work on any Apple Silicon Mac (M1&ndash;M4).</p>
+        <p>Two ways to get started. Both take about 10 minutes and work on any Apple Silicon Mac (M1&ndash;M4). <a href="#why" style="font-size: 0.92rem;">Not sure yet? See why it matters &rarr;</a></p>
 
         <div class="setup-triage">
 
@@ -2271,58 +2175,95 @@ defaults write company.thebrowser.Browser NSUserKeyEquivalents -dict-add "Always
 
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- SECTION 6: WHAT TO EXPECT                          -->
+    <!-- SECTION 3: WHY IT MATTERS                          -->
     <!-- ═══════════════════════════════════════════════════ -->
-    <section>
+    <section id="why">
       <div class="container">
-        <h2>What to Expect</h2>
-        <p>After setup, here's what you'll notice day-to-day:</p>
+        <h2>Why It Matters</h2>
 
-        <ul class="expect-list" style="margin-top: 64px;">
-          <li>
-            <span class="expect-icon">&#x26A1;</span>
-            <div class="expect-text">
-              <strong>The lightning bolt stays.</strong>
-              The battery icon in your menu bar will still show a lightning bolt (&#x26A1;) when plugged in. That means "connected to power," not "currently charging." This is normal.
-            </div>
-          </li>
-          <li>
-            <span class="expect-icon">&#x1F7E2;</span>
-            <div class="expect-text">
-              <strong>MagSafe LED colors.</strong>
-              Green means your battery is at the limit and holding. Amber means it's actively charging (either toward your limit or toward 100% in mobile mode).
-            </div>
-          </li>
-          <li>
-            <span class="expect-icon">&#x1F504;</span>
-            <div class="expect-text">
-              <strong>Small cycling is normal.</strong>
-              Your battery might drift between 68% and 70% (or 78% and 80%). This tiny range is normal and healthy &mdash; batt lets it fluctuate slightly to avoid constant micro-charging.
-            </div>
-          </li>
-          <li>
-            <span class="expect-icon">&#x1F4C9;</span>
-            <div class="expect-text">
-              <strong>Battery above limit will auto-drain.</strong>
-              If your Mac charges to 100% during a shutdown, the auto-drain monitor will notice and gently drain it back to your limit by disabling the power adapter temporarily. You might see the percentage dropping — that's the monitor doing its job.
-            </div>
-          </li>
-          <li>
-            <span class="expect-icon">&#x1F50C;</span>
-            <div class="expect-text">
-              <strong>Shutdowns charge to 100%.</strong>
-              When your Mac is fully shut down, batt isn't running, so the hardware charges normally. This is a hardware limitation &mdash; it's fine for occasional shutdowns. The monitor will drain it back when your Mac wakes up.
-            </div>
-          </li>
+        <p>The laptop replaced the desktop &mdash; but Apple didn't give you the tools to treat it like one. <strong>So BetterBattery does.</strong></p>
+        <p>Apple built <a href="https://support.apple.com/en-us/102589" target="_blank" rel="noopener">Optimized Battery Charging</a> and can even <a href="https://support.apple.com/en-us/102338" target="_blank" rel="noopener">detect when your MacBook is &ldquo;rarely used on battery&rdquo;</a> &mdash; but it doesn't go far enough. Even macOS 26.4's improved slider only goes down to 80% (in 5% steps), offers no desk/mobile toggle, and has no auto-drain monitor. Meanwhile, Microsoft, Lenovo, Dell, and HP all independently shipped their own charge limiters &mdash; because <a href="https://growthmarketreports.com/report/laptop-docking-station-market" target="_blank" rel="noopener">over two-thirds of workplaces deploy docking stations</a> as standard hardware. Everyone knows laptops live on desks. BetterBattery just does something about it.</p>
+
+        <h3>The Science</h3>
+
+        <ul class="science-list">
+          <li><strong>High voltage degrades batteries.</strong> Keeping a lithium-ion cell above 80% charge puts constant stress on the cathode, accelerating chemical breakdown. Lower charge = lower voltage = less stress.</li>
+          <li><strong>Every laptop maker knows this.</strong> Apple, Lenovo, Dell, and ASUS all ship some form of charge limiting. The science is settled &mdash; it's just not turned on by default.</li>
+          <li><strong>The numbers are significant.</strong> Batteries held at 70&ndash;80% retain roughly 96% of their capacity after one year. At 100%, that drops to around 80%. That's the difference between a 6-year battery and a 3-year one.</li>
         </ul>
+
+        <details>
+          <summary>Research citations</summary>
+          <div class="details-body">
+            <p><strong>Battery University BU-808</strong> &mdash; "How to Prolong Lithium-based Batteries." Comprehensive overview of voltage stress, depth of discharge, and temperature effects on cell longevity. <a href="https://batteryuniversity.com/article/bu-808-how-to-prolong-lithium-based-batteries" target="_blank" rel="noopener">Read article</a></p>
+            <p><strong>Choi &amp; Lim (2002)</strong> &mdash; "Factors that affect cycle-life and possible degradation mechanisms of a Li-ion cell based on LiCoO2." Journal of Power Sources. Demonstrated that higher upper charge voltage significantly reduces cycle life.</p>
+            <p><strong>Wikner &amp; Thiringer (2018)</strong> &mdash; "Extending Battery Lifetime by Avoiding High SOC." Applied Energy. Calendar aging study showing that state-of-charge is the dominant factor in capacity fade, even more than cycling.</p>
+            <p><strong>Dahn Lab, Dalhousie University (2019&ndash;2022)</strong> &mdash; Multiple studies on long-term degradation of NMC and LFP cells. Confirmed that reducing upper charge voltage from 4.2V to 4.0V (roughly 100% to 70%) can more than double calendar life.</p>
+            <p><strong>Apple Technical Support</strong> &mdash; Apple's own documentation acknowledges that "charging your battery to full and keeping it there for extended periods can be detrimental," which is why they introduced Optimized Battery Charging.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="environment" id="environment" style="padding: 80px 0;">
+        <div class="container">
+          <h3 style="color: #e8f0eb; font-size: 1.6rem; margin-top: 0;">The Bigger Picture</h3>
+          <p class="env-intro">Every battery that lasts twice as long is one that never needs to be mined, manufactured, shipped, and disposed of. Here's what that adds up to.</p>
+
+          <div class="calculator">
+            <h3>What if more people did this?</h3>
+            <p class="calc-label">Move the slider to see the impact if a percentage of MacBook users adopted charge limiting:</p>
+
+            <div class="calc-slider-row">
+              <input type="range" id="adoption-slider" min="1" max="100" value="10" aria-label="Adoption percentage">
+              <span class="calc-pct" id="adoption-value">10%</span>
+            </div>
+
+            <div class="calc-timeframe">
+              <span class="calc-timeframe-label">Over</span>
+              <button class="calc-time-pill selected" data-years="1">1 year</button>
+              <button class="calc-time-pill" data-years="5">5 years</button>
+              <button class="calc-time-pill" data-years="10">10 years</button>
+            </div>
+
+            <div class="calc-results">
+              <div class="calc-result">
+                <span class="calc-result-number" id="calc-replacements">1.1M</span>
+                <span class="calc-result-label">battery replacements avoided <span id="calc-period">per year</span></span>
+              </div>
+              <div class="calc-result">
+                <span class="calc-result-number" id="calc-co2">57,143</span>
+                <span class="calc-result-label">tonnes CO&#8322; saved</span>
+              </div>
+              <div class="calc-result">
+                <span class="calc-result-number" id="calc-lithium">8,000</span>
+                <span class="calc-result-label">kg lithium kept in the ground</span>
+              </div>
+            </div>
+            <p class="calc-footnote">Estimates based on published research from Battery University, Apple Environmental Reports, and MIT. <a href="#calc-methodology" id="calc-methodology-link">See the numbers behind this</a></p>
+          </div>
+
+          <p class="env-empowerment"><strong>You're not just saving your battery.</strong> You're part of something bigger.</p>
+
+          <details id="calc-methodology">
+            <summary>The numbers behind this</summary>
+            <div class="details-body">
+              <p><strong>6&ndash;8g of lithium</strong> in every MacBook battery &mdash; mined from fragile desert ecosystems in Chile, Argentina, and Australia. <a href="https://batteryguy.com/kb/knowledge-base/how-to-calculate-the-lithium-content-in-a-battery/" target="_blank" rel="noopener">IATA lithium content standard</a></p>
+              <p><strong>70% of global cobalt</strong> comes from the DRC, often from artisanal mines with severe human and environmental costs. <a href="https://pubs.usgs.gov/periodicals/mcs2024/mcs2024-cobalt.pdf" target="_blank" rel="noopener">USGS Mineral Commodity Summary</a></p>
+              <p><strong>~50kg of CO&#8322;</strong> emitted manufacturing and shipping each replacement battery (range: 30&ndash;60kg). <a href="https://climate.mit.edu/ask-mit/how-much-co2-emitted-manufacturing-batteries" target="_blank" rel="noopener">MIT Climate Portal</a>, <a href="https://www.apple.com/environment/" target="_blank" rel="noopener">Apple Environmental Reports</a></p>
+              <p><strong>62 million tonnes</strong> of e-waste generated globally in 2022 &mdash; the fastest-growing waste stream on the planet. Only 22% is properly recycled. <a href="https://ewastemonitor.info/" target="_blank" rel="noopener">Global E-waste Monitor 2024</a></p>
+              <p><strong>Battery chemicals leach.</strong> Lithium, cobalt, nickel, and manganese from improperly disposed batteries contaminate soil and groundwater. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10683946/" target="_blank" rel="noopener">PMC &mdash; Supply chain environmental impacts</a></p>
+              <p style="margin-top: 14px; font-size: 0.88rem;"><strong>Calculator methodology:</strong> Based on ~80M active MacBooks (<a href="https://www.spyhunter.com/shm/macos-stats/" target="_blank" rel="noopener">analyst estimates</a>; ~86% of ~100M Macs). Assumes each adopter avoids one battery replacement per 7 years (<a href="https://support.apple.com/en-us/102888" target="_blank" rel="noopener">Apple rates batteries at 1,000 cycles</a>). CO&#8322; at 50kg and lithium at 7g per replacement. Battery longevity data from <a href="https://batteryuniversity.com/article/bu-808-how-to-prolong-lithium-based-batteries" target="_blank" rel="noopener">Battery University BU-808</a>.</p>
+            </div>
+          </details>
+        </div>
       </div>
     </section>
 
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- SECTION 7: FAQ / TROUBLESHOOTING                   -->
+    <!-- SECTION 4: FAQ                                     -->
     <!-- ═══════════════════════════════════════════════════ -->
-    <section class="faq">
+    <section class="faq" id="faq">
       <div class="container">
         <h2>Frequently Asked Questions</h2>
 
@@ -2705,22 +2646,12 @@ rm -rf ~/Library/Services/Toggle\ Battery\ Limit.workflow</code></pre>
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // ── "Let's Be Real" progressive disclosure ──
-    document.getElementById('lbr-toggle').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.getElementById('lbr-more-link').style.display = 'none';
-      document.getElementById('lbr-expanded').style.display = 'inline';
-    });
-
-
-
     // ── Methodology link opens accordion ──
     document.getElementById('calc-methodology-link').addEventListener('click', function(e) {
       e.preventDefault();
       var details = document.getElementById('calc-methodology');
       details.open = true;
-      var section = details.closest('section');
-      section.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      details.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
 
     // ── Header: normal at top, sticky reveal-on-scroll-up after passing it ──
