@@ -175,9 +175,9 @@
       padding: 4px 14px;
       border-radius: 20px;
       letter-spacing: 0.01em;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+      display: block;
+      width: fit-content;
+      margin: 0 auto 16px;
     }
 
     .header-cta {
@@ -202,6 +202,9 @@
       display: flex;
       align-items: center;
       gap: 20px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .header-nav-link {
@@ -1260,8 +1263,7 @@
       section { padding: 96px 0; }
       section + section { margin-top: -96px; }
       .site-header { flex-wrap: wrap; gap: 8px; padding: 14px 24px !important; }
-      .header-badge { position: static; transform: none; width: 100%; text-align: center; order: -1; }
-      .header-nav-link { display: none; }
+      .header-nav { display: none; }
       h2 { font-size: 1.4rem; }
       .site-title { font-size: 1.4rem; }
       .mode-card { padding: 20px 14px; }
@@ -1291,13 +1293,13 @@
     <div class="header-wrap" id="header-wrap">
       <header class="site-header">
         <a href="#" class="site-title" id="logo-link">BetterBattery</a>
-        <span class="header-badge">Free &middot; 10 minutes &middot; Apple Silicon Macs</span>
         <nav class="header-nav">
           <a href="#how" class="header-nav-link">How it works</a>
-          <a href="#setup" class="header-cta">Set it up</a>
+          <a href="#setup" class="header-nav-link">Set it up</a>
           <a href="#why" class="header-nav-link">Why it matters</a>
           <a href="#faq" class="header-nav-link">FAQ</a>
         </nav>
+        <a href="#setup" class="header-cta">Get Started</a>
       </header>
     </div>
     <div class="header-spacer" id="header-spacer"></div>
@@ -1308,6 +1310,7 @@
     <!-- ═══════════════════════════════════════════════════ -->
     <section id="how" style="padding-top: 48px;">
       <div class="container">
+        <span class="header-badge">Free &middot; 10 minutes &middot; Apple Silicon Macs</span>
         <h2>How BetterBattery Works</h2>
         <p>Most MacBooks live on a desk, plugged in, slowly wearing out the battery that makes them portable. BetterBattery gives your Mac two power modes &mdash; switch between them with a single tap.</p>
 
