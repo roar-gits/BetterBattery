@@ -2183,28 +2183,6 @@ defaults write company.thebrowser.Browser NSUserKeyEquivalents -dict-add "Always
     <section id="why">
       <div class="container">
         <h2>Why It Matters</h2>
-
-        <p>The laptop replaced the desktop &mdash; but Apple didn't give you the tools to treat it like one. <strong>So BetterBattery does.</strong></p>
-        <p>Apple built <a href="https://support.apple.com/en-us/102589" target="_blank" rel="noopener">Optimized Battery Charging</a> and can even <a href="https://support.apple.com/en-us/102338" target="_blank" rel="noopener">detect when your MacBook is &ldquo;rarely used on battery&rdquo;</a> &mdash; but it doesn't go far enough. Even macOS 26.4's improved slider only goes down to 80% (in 5% steps), offers no desk/mobile toggle, and has no auto-drain monitor. Meanwhile, Microsoft, Lenovo, Dell, and HP all independently shipped their own charge limiters &mdash; because <a href="https://growthmarketreports.com/report/laptop-docking-station-market" target="_blank" rel="noopener">over two-thirds of workplaces deploy docking stations</a> as standard hardware. Everyone knows laptops live on desks. BetterBattery just does something about it.</p>
-
-        <h3>The Science</h3>
-
-        <ul class="science-list">
-          <li><strong>High voltage degrades batteries.</strong> Keeping a lithium-ion cell above 80% charge puts constant stress on the cathode, accelerating chemical breakdown. Lower charge = lower voltage = less stress.</li>
-          <li><strong>Every laptop maker knows this.</strong> Apple, Lenovo, Dell, and ASUS all ship some form of charge limiting. The science is settled &mdash; it's just not turned on by default.</li>
-          <li><strong>The numbers are significant.</strong> Batteries held at 70&ndash;80% retain roughly 96% of their capacity after one year. At 100%, that drops to around 80%. That's the difference between a 6-year battery and a 3-year one.</li>
-        </ul>
-
-        <details>
-          <summary>Research citations</summary>
-          <div class="details-body">
-            <p><strong>Battery University BU-808</strong> &mdash; "How to Prolong Lithium-based Batteries." Comprehensive overview of voltage stress, depth of discharge, and temperature effects on cell longevity. <a href="https://batteryuniversity.com/article/bu-808-how-to-prolong-lithium-based-batteries" target="_blank" rel="noopener">Read article</a></p>
-            <p><strong>Choi &amp; Lim (2002)</strong> &mdash; "Factors that affect cycle-life and possible degradation mechanisms of a Li-ion cell based on LiCoO2." Journal of Power Sources. Demonstrated that higher upper charge voltage significantly reduces cycle life.</p>
-            <p><strong>Wikner &amp; Thiringer (2018)</strong> &mdash; "Extending Battery Lifetime by Avoiding High SOC." Applied Energy. Calendar aging study showing that state-of-charge is the dominant factor in capacity fade, even more than cycling.</p>
-            <p><strong>Dahn Lab, Dalhousie University (2019&ndash;2022)</strong> &mdash; Multiple studies on long-term degradation of NMC and LFP cells. Confirmed that reducing upper charge voltage from 4.2V to 4.0V (roughly 100% to 70%) can more than double calendar life.</p>
-            <p><strong>Apple Technical Support</strong> &mdash; Apple's own documentation acknowledges that "charging your battery to full and keeping it there for extended periods can be detrimental," which is why they introduced Optimized Battery Charging.</p>
-          </div>
-        </details>
       </div>
 
       <div class="environment" id="environment" style="padding: 80px 0;">
@@ -2259,6 +2237,30 @@ defaults write company.thebrowser.Browser NSUserKeyEquivalents -dict-add "Always
             </div>
           </details>
         </div>
+      </div>
+
+      <div class="container" style="padding-top: 48px;">
+        <p>The laptop replaced the desktop &mdash; but Apple didn't give you the tools to treat it like one. <strong>So BetterBattery does.</strong></p>
+        <p>Apple built <a href="https://support.apple.com/en-us/102589" target="_blank" rel="noopener">Optimized Battery Charging</a> and can even <a href="https://support.apple.com/en-us/102338" target="_blank" rel="noopener">detect when your MacBook is &ldquo;rarely used on battery&rdquo;</a> &mdash; but it doesn't go far enough. Even macOS 26.4's improved slider only goes down to 80% (in 5% steps), offers no desk/mobile toggle, and has no auto-drain monitor. Meanwhile, Microsoft, Lenovo, Dell, and HP all independently shipped their own charge limiters &mdash; because <a href="https://growthmarketreports.com/report/laptop-docking-station-market" target="_blank" rel="noopener">over two-thirds of workplaces deploy docking stations</a> as standard hardware. Everyone knows laptops live on desks. BetterBattery just does something about it.</p>
+
+        <h3>The Science</h3>
+
+        <ul class="science-list">
+          <li><strong>High voltage degrades batteries.</strong> Keeping a lithium-ion cell above 80% charge puts constant stress on the cathode, accelerating chemical breakdown. Lower charge = lower voltage = less stress.</li>
+          <li><strong>Every laptop maker knows this.</strong> Apple, Lenovo, Dell, and ASUS all ship some form of charge limiting. The science is settled &mdash; it's just not turned on by default.</li>
+          <li><strong>The numbers are significant.</strong> Batteries held at 70&ndash;80% retain roughly 96% of their capacity after one year. At 100%, that drops to around 80%. That's the difference between a 6-year battery and a 3-year one.</li>
+        </ul>
+
+        <details>
+          <summary>Research citations</summary>
+          <div class="details-body">
+            <p><strong>Battery University BU-808</strong> &mdash; "How to Prolong Lithium-based Batteries." Comprehensive overview of voltage stress, depth of discharge, and temperature effects on cell longevity. <a href="https://batteryuniversity.com/article/bu-808-how-to-prolong-lithium-based-batteries" target="_blank" rel="noopener">Read article</a></p>
+            <p><strong>Choi &amp; Lim (2002)</strong> &mdash; "Factors that affect cycle-life and possible degradation mechanisms of a Li-ion cell based on LiCoO2." Journal of Power Sources. Demonstrated that higher upper charge voltage significantly reduces cycle life.</p>
+            <p><strong>Wikner &amp; Thiringer (2018)</strong> &mdash; "Extending Battery Lifetime by Avoiding High SOC." Applied Energy. Calendar aging study showing that state-of-charge is the dominant factor in capacity fade, even more than cycling.</p>
+            <p><strong>Dahn Lab, Dalhousie University (2019&ndash;2022)</strong> &mdash; Multiple studies on long-term degradation of NMC and LFP cells. Confirmed that reducing upper charge voltage from 4.2V to 4.0V (roughly 100% to 70%) can more than double calendar life.</p>
+            <p><strong>Apple Technical Support</strong> &mdash; Apple's own documentation acknowledges that "charging your battery to full and keeping it there for extended periods can be detrimental," which is why they introduced Optimized Battery Charging.</p>
+          </div>
+        </details>
       </div>
     </section>
 
